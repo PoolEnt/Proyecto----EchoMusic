@@ -1,0 +1,4 @@
+Pip install {
+    - django
+    - mysqlclient
+}
