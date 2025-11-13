@@ -77,6 +77,12 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
+    },
+    'usuarios':{
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'echomusic_bd',
+        'USER': 'root',
+        'PASSWORD': ''
     }
 }
 
