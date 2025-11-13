@@ -28,9 +28,8 @@ body, html {
 }
 
 .img_logo {
-    width: 150px;
-    height: 150px;
-    border-radius: 20px;
+    width: 80px;
+    height: 80px;
     justify-self: center;
 }
 
