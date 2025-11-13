@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+    <style>
+        svg {
+            background-color: #ffd89b;
+        }
+    </style>
+
+    <radialGradient id="color_disco" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ffdd76" />
+      <stop offset="50%" stop-color="#ff9335" />
+    </radialGradient>
+
+    <circle cx="50" cy="50" r="20" fill="url(#color_disco)" stroke="#222222" stroke-width="20"/>
+    <circle cx="50" cy="50" r="1" fill="#222222" />
+    
+</svg>

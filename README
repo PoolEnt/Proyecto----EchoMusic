@@ -1,4 +1,5 @@
 Pip install {
     - django
     - mysqlclient
+    - Pillow
 }
