@@ -3,12 +3,10 @@
         svg {
             background-color: none;
         }
-        .figura {
-            fill: #ffd145;
-        }
         circle {
+            transform: scale(2) scaleY(50%);
             cx: 100;
-            cy: ;
+            cy: 01;
         }
     </style>
 
@@ -41,12 +39,17 @@
                 <circle r="141" fill="none" stroke="white" stroke-width="3" />
             </g>
         </mask>
+
+        <radialGradient gradientUnits="userSpaceOnUse" id="gradiente" cx="100%" cy="0%" r="100%">
+            <stop offset="0%" stop-color="#ffe188" />
+            <stop offset="100%" stop-color="#ff8c00" />
+        </radialGradient>
     </defs>
 
-    <g id="patron" mask="url(#forma)">
-        <ellipse class="figura" cx="20" cy="85" rx="20" ry="15" fill="white" />
-        <ellipse class="figura" cx="80" cy="85" rx="20" ry="15" fill="white" />
-        <path class="figura" d="M 30 85 L 40 85 L 40 20 Q 65 15 85 20 L 90 85 L 100 85 L 100 0 Q 60 0 25 5" fill="#ffffff" />
+    <g id="patron" mask="url(#forma)" fill="url(#gradiente)">
+        <ellipse  cx="20" cy="85" rx="20" ry="15" />
+        <ellipse cx="80" cy="85" rx="20" ry="15" />
+        <path d="M 30 85 L 40 85 L 40 20 Q 65 15 85 20 L 90 85 L 100 85 L 100 0 Q 60 0 25 5" />
     </g>
 
 </svg>
