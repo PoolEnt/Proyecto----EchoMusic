@@ -74,15 +74,15 @@ WSGI_APPLICATION = 'EchoMusic.wsgi.application'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    },
-    'usuarios':{
+    'default':{
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'echomusic_bd',
         'USER': 'root',
         'PASSWORD': ''
+    },
+    'firebase': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 

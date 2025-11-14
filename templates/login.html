@@ -8,31 +8,42 @@
 </head>
 <body>
     <div class="div_fondo_form">
+        <img class="img_logo" src="/static/images/icons/logo.svg" alt="logo_echomusic">
         <form action="" method="get">
             <div class="div_login" id="div_login">
-                <img class="img_logo" src="/static/images/icons/logo.svg" alt="logo_echomusic">
                 <h1 class="titulo_login">EchoMusic</h1>
+                <h3 class="titulo_login">Iniciar sesión</h3>
                 <input class="input_form" type="email" placeholder="Email">
                 <input class="input_form" type="password" placeholder="Contraseña">
                 <div class="div_botones">
                     <button type="submit" class="btn_ingresar">Ingresar</button>
-                    <button type="button" class="btn_registrarse">Registrarse</button>
+                    <button id="btn_regitro" type="button" class="btn_registrarse">Registrarse</button>
                 </div>
             </div>
         </form>
 
-        <form action="" method="get">
+        <form action="{% url 'registrarse' %}" method="post">
+            {% csrf_token %}
             <div class="div_register" id="div_register">
-                <img class="img_logo" src="/static/images/icons/logo.svg" alt="logo_echomusic">
                 <h1 class="titulo_login">EchoMusic</h1>
-                <input class="input_form" type="email" placeholder="Email">
+                <h3 class="titulo_login">Registro</h3>
+                <input class="input_form" type="text" placeholder="Nombre de usuario" name="nombre_usuario">
+                <input class="input_form" type="text" placeholder="Nombre" name="nombre">
+                <input class="input_form" type="text" placeholder="Apellido" name="apellido">
+                <input class="input_form" type="email" placeholder="Email" name="email">
+                <input class="input_form" type="email" placeholder="Confirmar email" name="email_confirmar">
                 <input class="input_form" type="password" placeholder="Contraseña">
+                <input class="input_form" type="password" placeholder="Confirmar contraseña" name="contraseña_confirmar">
                 <div class="div_botones">
-                    <button type="submit" class="btn_ingresar">Ingresar</button>
-                    <button type="button" class="btn_registrarse">Registrarse</button>
+                    <button type="submit" class="btn_ingresar">Registrarse</button>
+                    <button id="btn_volver" type="button" class="btn_registrarse">Volver</button>
                 </div>
             </div>
         </form>
+    </div>
+
+    <div class="div_mensaje">
+        {{ mensaje }}
     </div>
 
     <script src="/static/scripts/login.js"></script>

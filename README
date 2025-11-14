@@ -2,4 +2,5 @@ Pip install {
     - django
     - mysqlclient
     - Pillow
+    - bcrypt
 }

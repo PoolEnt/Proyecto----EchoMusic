@@ -1,5 +1,5 @@
 body, html {
-    background-color: black;
+    background-color: rgb(16, 16, 16);
     margin: 0;
     display: grid;
     height: 100%;
@@ -25,10 +25,12 @@ body, html {
     background-color: rgb(36, 36, 36);
     border-radius: 20px;
     padding: 30px;
-    max-height: 70vh;
-    max-width: 75vw;
+    max-height: 65vh;
+    max-width: 70vw;
     width: 400px;
     overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-width: none;
 }
 
 .div_register {
@@ -40,10 +42,12 @@ body, html {
     background-color: rgb(36, 36, 36);
     border-radius: 20px;
     padding: 30px;
-    max-height: 70vh;
-    max-width: 75vw;
+    max-height: 65vh;
+    max-width: 70vw;
     width: 400px;
     overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-width: none;
 }
 
 .titulo_login {
@@ -55,10 +59,12 @@ body, html {
 }
 
 .img_logo {
-    width: 80px;
-    height: 80px;
-    justify-self: center;
-    margin-bottom: 20px;
+    top: 0;
+    margin: 2.5vw;
+    position: fixed;
+    width: 3.5vw;
+    height: 3.5vw;
+    z-index: 1;
 }
 
 .input_form {
@@ -113,4 +119,8 @@ body, html {
 
 .btn_registrarse:hover {
     color: #ffd041;
+}
+
+.div_mensaje {
+    display: none;
 }
