@@ -8,14 +8,33 @@
 </head>
 <body>
     <div class="div_fondo_form">
-        <img class="img_logo" src="/static/images/icons/logo.svg" alt="logo_echomusic">
-        <h1 class="titulo_login">EchoMusic</h1>
-        <input class="input_form" type="email" placeholder="Email">
-        <input class="input_form" type="password" placeholder="Contraseña">
-        <div class="div_botones">
-            <button class="btn_ingresar">Ingresar</button>
-            <button class="btn_registrarse">Registrarse</button>
-        </div>
+        <form action="" method="get">
+            <div class="div_login" id="div_login">
+                <img class="img_logo" src="/static/images/icons/logo.svg" alt="logo_echomusic">
+                <h1 class="titulo_login">EchoMusic</h1>
+                <input class="input_form" type="email" placeholder="Email">
+                <input class="input_form" type="password" placeholder="Contraseña">
+                <div class="div_botones">
+                    <button type="submit" class="btn_ingresar">Ingresar</button>
+                    <button type="button" class="btn_registrarse">Registrarse</button>
+                </div>
+            </div>
+        </form>
+
+        <form action="" method="get">
+            <div class="div_register" id="div_register">
+                <img class="img_logo" src="/static/images/icons/logo.svg" alt="logo_echomusic">
+                <h1 class="titulo_login">EchoMusic</h1>
+                <input class="input_form" type="email" placeholder="Email">
+                <input class="input_form" type="password" placeholder="Contraseña">
+                <div class="div_botones">
+                    <button type="submit" class="btn_ingresar">Ingresar</button>
+                    <button type="button" class="btn_registrarse">Registrarse</button>
+                </div>
+            </div>
+        </form>
     </div>
+
+    <script src="/static/scripts/login.js"></script>
 </body>
 </html>

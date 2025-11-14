@@ -2,28 +2,55 @@ body, html {
     background-color: black;
     margin: 0;
     display: grid;
-    justify-content: center;
     height: 100%;
     width: 100%;
-    align-items: center;
 }
 
 .div_fondo_form {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: grid;
+    overflow: hidden;
+    justify-content: center;
+    align-items: center;
+}
+
+.div_login {
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    position: absolute;
     display: grid;
     background-color: rgb(36, 36, 36);
     border-radius: 20px;
-    padding: 20px;
+    padding: 30px;
     max-height: 70vh;
     max-width: 75vw;
     width: 400px;
+    overflow-y: auto;
+}
+
+.div_register {
+    top: 200%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    position: absolute;
+    display: grid;
+    background-color: rgb(36, 36, 36);
+    border-radius: 20px;
+    padding: 30px;
+    max-height: 70vh;
+    max-width: 75vw;
+    width: 400px;
+    overflow-y: auto;
 }
 
 .titulo_login {
-    color: white;
+    color: #ffdd76;
     font-family: Arial, Helvetica, sans-serif;
     margin: 0;
-    margin-top: 20px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     text-align: center;
 }
 
@@ -31,6 +58,7 @@ body, html {
     width: 80px;
     height: 80px;
     justify-self: center;
+    margin-bottom: 20px;
 }
 
 .input_form {
@@ -52,12 +80,37 @@ body, html {
 .div_botones {
     display: flex;
     align-items: center;
+    margin-top: 20px;
 }
 
 .btn_ingresar {
     color: white;
-    background-color: #ffdd76;
+    background-color: #eab926;
     border: 0;
     border-radius: 25px;
-    padding: 10px;
+    padding: 15px;
+    width: 100%;
+    font-size: 15px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.btn_ingresar:hover {
+    background-color: #ffd041;
+}
+
+.btn_registrarse {
+    color: #eab926;
+    background-color: white;
+    border: 0;
+    border-radius: 25px;
+    padding: 15px;
+    width: 100%;
+    font-size: 15px;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.btn_registrarse:hover {
+    color: #ffd041;
 }
