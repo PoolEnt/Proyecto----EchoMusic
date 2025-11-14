@@ -5,11 +5,13 @@ from .models import Usuario
 def hashear_contraseña(contraseña):
     sal_generada = bcrypt.gensalt()
     hash_resultante = bcrypt.hashpw(contraseña.encode('utf-8'), sal_generada)
-    return hash_resultante
+    hash_str = hash_resultante.decode('utf-8')
+    return hash_str
 
 def verificar_contraseña(contraseña, hash_almacenado):
     contraseña_bytes = contraseña.encode('utf-8')
-    return bcrypt.checkpw(contraseña_bytes, hash_almacenado)
+    hash_almacenado_bytes = hash_almacenado.encode('utf-8')
+    return bcrypt.checkpw(contraseña_bytes, hash_almacenado_bytes)
 
 # Create your views here.
 
@@ -18,7 +20,13 @@ def login(request):
 
 def index(request):
     if 'usuario_id' in request.session:
-        return render(request, 'index.html')
+        usuario = Usuario.objects.get(id=request.session['usuario_id'])
+
+        data = {
+            'usuario':usuario
+        }
+
+        return render(request, 'index.html', data)
     else:
         return redirect('login')
 
@@ -27,20 +35,21 @@ def registrarse(request):
         nombre_usuario = request.POST.get("nombre_usuario")
         nombre = request.POST.get("nombre")
         apellido = request.POST.get("apellido")
-        email = request.POST.get("email")
-        email_comfirmar = request.POST.get("email_confirmar")
+        correo = request.POST.get("correo")
+        correo_comfirmar = request.POST.get("correo_confirmar")
         contraseña = request.POST.get("contraseña")
-        contraseña_comfirmar = request.POST.get("contraseña_confirmar")
+        contraseña_confirmar = request.POST.get("contraseña_confirmar")
 
         try:
-            if email == email_comfirmar and contraseña == contraseña_comfirmar:
+            if correo == correo_comfirmar and contraseña == contraseña_confirmar:
+
                 contraseña_hash = hashear_contraseña(contraseña)
 
                 usuario = Usuario.objects.create(
                     username=nombre_usuario,
                     nombre=nombre,
                     apellido=apellido,
-                    email=email,
+                    correo=correo,
                     contraseña=contraseña_hash
                 )
 
@@ -61,6 +70,37 @@ def registrarse(request):
             
             data = {
                 'mensaje': 'Ocurrió un error al momento de registrarse'
+            }
+
+            return render(request, 'login.html', data)
+    else:
+        return redirect('login')
+    
+def ingresar(request):
+    if request.method == "GET":
+        correo = request.GET.get("correo")
+        contraseña = request.GET.get("contraseña")
+
+        try:
+            usuario = Usuario.objects.get(correo=correo)
+
+            if verificar_contraseña(contraseña, usuario.contraseña):
+                request.session['usuario_id'] = usuario.id
+                request.session.modified = True
+            
+                return redirect('index')
+            else:
+                data = {
+                    'mensaje': 'No se encontró el usuario ingresado'
+                }
+
+                return render(request, 'login.html', data)
+
+        except Exception as e:
+            print(f"ERROR: {e}")
+            
+            data = {
+                'mensaje': 'Ocurrió un error al momento de ingresar'
             }
 
             return render(request, 'login.html', data)

@@ -9,12 +9,14 @@
 <body>
     <div class="div_fondo_form">
         <img class="img_logo" src="/static/images/icons/logo.svg" alt="logo_echomusic">
-        <form action="" method="get">
+        
+        <form action="{% url 'ingresar' %}" method="get">
+            {% csrf_token %}
             <div class="div_login" id="div_login">
                 <h1 class="titulo_login">EchoMusic</h1>
                 <h3 class="titulo_login">Iniciar sesión</h3>
-                <input class="input_form" type="email" placeholder="Email">
-                <input class="input_form" type="password" placeholder="Contraseña">
+                <input class="input_form" type="email" placeholder="Email" name="correo">
+                <input class="input_form" type="password" placeholder="Contraseña" name="contraseña">
                 <div class="div_botones">
                     <button type="submit" class="btn_ingresar">Ingresar</button>
                     <button id="btn_regitro" type="button" class="btn_registrarse">Registrarse</button>
@@ -30,9 +32,9 @@
                 <input class="input_form" type="text" placeholder="Nombre de usuario" name="nombre_usuario">
                 <input class="input_form" type="text" placeholder="Nombre" name="nombre">
                 <input class="input_form" type="text" placeholder="Apellido" name="apellido">
-                <input class="input_form" type="email" placeholder="Email" name="email">
-                <input class="input_form" type="email" placeholder="Confirmar email" name="email_confirmar">
-                <input class="input_form" type="password" placeholder="Contraseña">
+                <input class="input_form" type="email" placeholder="Email" name="correo">
+                <input class="input_form" type="email" placeholder="Confirmar email" name="correo_confirmar">
+                <input class="input_form" type="password" placeholder="Contraseña" name="contraseña">
                 <input class="input_form" type="password" placeholder="Confirmar contraseña" name="contraseña_confirmar">
                 <div class="div_botones">
                     <button type="submit" class="btn_ingresar">Registrarse</button>
@@ -42,9 +44,11 @@
         </form>
     </div>
 
-    <div class="div_mensaje">
-        {{ mensaje }}
-    </div>
+    {% if mensaje %}
+        <div class="div_mensaje">
+            {{ mensaje }}
+        </div>
+    {% endif %}
 
     <script src="/static/scripts/login.js"></script>
 </body>

@@ -7,7 +7,7 @@ class Usuario(models.Model):
     apellido = models.CharField(max_length=30, null=False, blank=False)
     username = models.CharField(max_length=30, null=False, blank=False, unique=True)
     correo = models.EmailField(null=False, blank=False, unique=True)
-    contraseña = models.CharField(max_length=50, null=False, blank=False)
+    contraseña = models.CharField(max_length=100, null=False, blank=False)
     foto_perfil = models.ImageField(null=True, blank=True, default='/static/images/icons/img_perfil.svg')
 
 class Playlist(models.Model):
@@ -18,4 +18,5 @@ class Playlist(models.Model):
 class Cancion(models.Model):
     nombre = models.CharField(max_length=30, null=False, blank=False, unique=True)
     autor = models.CharField(max_length=30, null=False, blank=False)
-    archivo = models.FileField(null=False, blank=False)
+    archivo = models.FileField(null=False, blank=False, unique=True)
+    playlist = models.ForeignKey(Playlist, null=False, blank=False, on_delete=models.CASCADE)

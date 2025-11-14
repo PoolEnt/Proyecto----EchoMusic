@@ -122,5 +122,29 @@ body, html {
 }
 
 .div_mensaje {
-    display: none;
+    position: absolute;
+    display: grid;
+    background-color: rgb(185, 185, 185);
+    padding: 15px;
+    border-radius: 25px;
+    color: rgb(75, 75, 75);
+    left: 50%;
+    font-family: Arial, Helvetica, sans-serif;
+    transform: translateX(-50%) translateY(50%);
+    animation-name: mensaje;
+    animation-duration: 3000ms;
+    animation-fill-mode: forwards;
+}
+
+@keyframes mensaje {
+    0%{
+        opacity: 100%;
+    }
+    50%{
+        opacity: 100%;
+    }
+    100%{
+        opacity: 0%;
+        display: none;
+    }
 }
