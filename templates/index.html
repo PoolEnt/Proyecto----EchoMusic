@@ -3,9 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EchoMusic: Home</title>
+    <title>EchoMusic: Inicio</title>
+    <link rel="stylesheet" href="/static/styles/index.css">
 </head>
 <body>
-    <h1>{{ usuario.username }}</h1>
+    <div class="div_fondo_home">
+        <form class="form_buscar" action="#" method="get">
+            {% csrf_token %}
+            <div class="div_buscar">
+                <input class="input_buscar" type="text" placeholder="Buscar">
+                <button class="btn_buscar" type="submit"></button>
+            </div>
+            <a class="btn_perfil" href="{% url 'perfil' %}"></a>
+        </form>
+
+        <h1>Tu biblioteca</h1>
+        <div class="div_filtros">
+            <button class="btn_filtro_act" type="button">Canciones</button>
+            <button class="btn_filtro_des" type="button">Álbumes</button>
+        </div>
+
+        <div class="div_canciones" id="div_canciones">
+            {% if canciones %}
+                {% for cancion in canciones %}
+                    <div class="div_cancion">
+                        <img src="{{ cancion.imagen }}" alt="imagen_cancion">
+                        <p><strong>{{ cancion.nombre }}</strong></p>
+                        <p>{{ cancion.autor }}</p>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <h3 class="txt_mensaje_home">No hay canciones guardadas</h3>
+            {% endif %}
+        </div>
+
+        <div class="div_albumes" id="div_albumes">
+            {% if albumes %}
+                {% for album in albumes %}
+                    <div class="div_album">
+                        <img src="{{ album.imagen }}" alt="imagen_album">
+                        <p><strong>{{ album.nombre }}</strong></p>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <h3>No hay álbumes creados</h3>
+            {% endif %}
+        </div>
+
+        <div class="div_botones_home">
+            <button class="btn_crear" type="button">Crear</button>
+            <button class="btn_subir" type="button"></button>
+        </div>
+    </div>
 </body>
 </html>

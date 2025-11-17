@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 import bcrypt
-from .models import Usuario
+from .models import Usuario, Album, Cancion
 
 def hashear_contraseña(contraseña):
     sal_generada = bcrypt.gensalt()
@@ -21,9 +21,13 @@ def login(request):
 def index(request):
     if 'usuario_id' in request.session:
         usuario = Usuario.objects.get(id=request.session['usuario_id'])
+        albumes = Album.objects.filter(usuario=usuario)
+        canciones = Cancion.objects.filter(usuario=usuario)
 
         data = {
-            'usuario':usuario
+            'usuario':usuario,
+            'albumes': albumes,
+            'canciones': canciones
         }
 
         return render(request, 'index.html', data)
@@ -104,5 +108,17 @@ def ingresar(request):
             }
 
             return render(request, 'login.html', data)
+    else:
+        return redirect('login')
+    
+def perfil(request):
+    if 'usuario_id' in request.session:
+        usuario = Usuario.objects.get(id=request.session['usuario_id'])
+
+        data = {
+            'usuario':usuario
+        }
+
+        return render(request, 'perfil.html', data)
     else:
         return redirect('login')

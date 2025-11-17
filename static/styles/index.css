@@ -1,0 +1,163 @@
+body, html {
+    background-color: rgb(16, 16, 16);
+    margin: 0;
+    display: grid;
+    height: 100%;
+    width: 100%;
+    position: relative;
+}
+
+.div_fondo_home {
+    padding: 20px;
+    position: relative;
+}
+
+.form_buscar {
+    display: flex;
+    position: relative;
+    align-items: center;
+}
+
+.div_buscar {
+    display: flex;
+    position: relative;
+    align-items: center;
+    flex-grow: 1;
+}
+
+.input_buscar {
+    flex-grow: 1;
+    padding: 10px;
+    outline: none;
+    border-radius: 25px;
+    border: 0;
+    background-color: rgb(78, 78, 78);
+    color: white;
+}
+
+.input_buscar::placeholder {
+    color: #eab926c2;
+}
+
+.btn_buscar {
+    position: absolute;
+    right: 0;
+    background-color: transparent;
+    border: 0;
+    height: 20px;
+    width: 20px;
+    background-image: url("/static/images/icons/btn_buscar.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.btn_perfil {
+    height: 50px;
+    width: 50px;
+    background-image: url("/static/images/icons/img_perfil.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    border-radius: 100%;
+    margin-left: 20px;
+}
+
+h1 {
+    font-family: Arial, Helvetica, sans-serif;
+    color: #eab926;
+}
+
+.div_filtros {
+    display: flex;
+}
+
+.btn_filtro_act {
+    color: #eab926;
+    background-color: white;
+    border: 2px solid #eab926;
+    border-radius: 25px;
+    padding: 10px;
+    font-size: 15px;
+    font-weight: bold;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.btn_filtro_des {
+    color: white;
+    background-color: #eab926;
+    border: 2px solid #eab926;
+    border-radius: 25px;
+    padding: 10px;
+    font-size: 15px;
+    font-weight: bold;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.div_canciones {
+    margin-top: 20px;
+    background-color: rgb(35, 35, 35);
+    border-radius: 20px;
+    padding: 10px;
+}
+
+.div_albumes {
+    display: none;
+}
+
+.txt_mensaje_home {
+    color: #eab926;
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+    margin: 0;
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+.div_botones_home {
+    position: absolute;
+    display: grid;
+    right: 0;
+    bottom: 0;
+    padding: 20px;
+}
+
+.btn_crear {
+    width: 100px;
+    height: 100px;
+    border: 0;
+    background-color: #ffb223;
+    color: white;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+    border-radius: 100%;
+    text-align: center;
+    cursor: pointer;
+    margin-bottom: 5px;
+}
+
+.btn_crear:hover {
+    background-color: #ffad41;
+}
+
+.btn_subir {
+    width: 100px;
+    height: 100px;
+    border: 0;
+    background-color: #ff6b3e;
+    border-radius: 100%;
+    cursor: pointer;
+    background-image: url("/static/images/icons/btn_subir.svg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 50%;
+    margin-top: 5px;
+}
+
+.btn_subir:hover {
+    background-color: #ff815b;
+}
