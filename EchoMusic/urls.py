@@ -17,6 +17,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from echomusicApp import views
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -24,5 +26,9 @@ urlpatterns = [
     path('login/', views.login, name='login'),
     path('registrarse/', views.registrarse, name='registrarse'),
     path('ingresar/', views.ingresar, name='ingresar'),
-    path('perfil/', views.perfil, name='perfil')
+    path('perfil/', views.perfil, name='perfil'),
+    path('subir_cancion/', views.subir_cancion, name='subir_cancion')
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

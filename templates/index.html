@@ -27,7 +27,7 @@
             {% if canciones %}
                 {% for cancion in canciones %}
                     <div class="div_cancion">
-                        <img src="{{ cancion.imagen }}" alt="imagen_cancion">
+                        <img src="{{ cancion.imagen.url }}" alt="imagen_cancion">
                         <p><strong>{{ cancion.nombre }}</strong></p>
                         <p>{{ cancion.autor }}</p>
                     </div>
@@ -41,7 +41,7 @@
             {% if albumes %}
                 {% for album in albumes %}
                     <div class="div_album">
-                        <img src="{{ album.imagen }}" alt="imagen_album">
+                        <img src="{{ album.imagen.url }}" alt="imagen_album">
                         <p><strong>{{ album.nombre }}</strong></p>
                     </div>
                 {% endfor %}
@@ -57,19 +57,39 @@
     </div>
 
     <div class="div_fondo" id="div_fondo_crear">
-        <div class="div_subir">
-            <h1>Crear un álbum</h1>
-            <img class="btn_image_album" src="/static/images/icons/img_album.svg" alt="imagen_album">
-            <input type="hidden">
+        <form class="div_subir" action="#" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="div_image_form">
+                <img class="btn_image" src="/static/images/icons/img_album.svg" id="btn_image_album" alt="imagen_álbum">
+                <input id="input_imagen_crear" type="file" style="display: none;" name="imagen">
+            </div>
+            
             <input class="input_form" type="text" placeholder="Nombre del álbum">
-        </div>
+            <textarea class="txt_descripcion" name="descripcion" placeholder="Descripción del álbum"></textarea>
+        </form>
     </div>
 
     <div class="div_fondo" id="div_fondo_subir">
-        <div class="div_subir">
-            <h1>Subir una canción</h1>
-            <input class="input_form" type="text" placeholder="Nombre de la canción">
-        </div>
+        <form class="div_subir" action="{% url 'subir_cancion' %}" enctype="multipart/form-data" method="post">
+            {% csrf_token %}
+            <h1 class="titulo_form">Subir una canción</h1>
+
+            <div class="div_image_form">
+                <div class="btn_image_hover" id="btn_image_cancion_hover"></div>
+                <img class="btn_image" src="/static/images/icons/img_album.svg" id="btn_image_cancion" alt="imagen_canción">
+            </div>
+
+            <input id="input_imagen_subir" type="file" style="display: none;" name="imagen_cancion">
+            <input class="input_form" id="input_nombre_cancion" type="text" placeholder="Nombre de la canción" name="nombre">
+            <input class="input_form" id="input_autor_cancion" type="text" placeholder="Autor de la canción" name="autor">
+            <button class="btn_archivo" type="button" id="btn_archivo">Seleccionar archivo</button>
+            <input id="input_archivo" style="display: none;" type="file" name="archivo">
+
+            <div class="div_botones_subir">
+                <button type="submit" class="btn_subir_cancion">Subir</button>
+                <button type="button" class="btn_cancelar_cancion" id="btn_cancelar_cancion">Cancelar</button>
+            </div>
+        </form>
     </div>
 
     <script src="/static/scripts/index.js"></script>

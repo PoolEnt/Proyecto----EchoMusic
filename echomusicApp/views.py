@@ -122,3 +122,43 @@ def perfil(request):
         return render(request, 'perfil.html', data)
     else:
         return redirect('login')
+
+def subir_cancion(request):
+    if 'usuario_id' in request.session:
+        imagen_cancion = request.FILES.get("imagen_cancion")
+        nombre = request.POST.get("nombre")
+        autor = request.POST.get("autor")
+        archivo = request.FILES.get("archivo")
+
+        print("Archivos recibidos:", request.FILES)
+
+        try:
+            usuario = Usuario.objects.get(id=request.session['usuario_id'])
+
+            if imagen_cancion:
+                cancion = Cancion.objects.create(
+                    nombre=nombre,
+                    autor=autor,
+                    imagen=imagen_cancion,
+                    archivo=archivo,
+                    usuario=usuario
+                )
+
+                cancion.save()
+
+                return redirect('index')
+            else:
+                cancion = Cancion.objects.create(
+                    nombre=nombre,
+                    autor=autor,
+                    archivo=archivo,
+                    usuario=usuario
+                )
+
+                return redirect('index')
+        except Exception as e:
+            print(f'ERROR: {e}')
+            return redirect('index')
+        
+    else:
+        return redirect('login')

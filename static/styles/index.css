@@ -32,11 +32,11 @@ body, html {
     border-radius: 25px;
     border: 0;
     background-color: rgb(78, 78, 78);
-    color: white;
+    color: #eab926;
 }
 
 .input_buscar::placeholder {
-    color: #eab926c2;
+    color: #eab9267e;
 }
 
 .btn_buscar {
@@ -174,13 +174,106 @@ h1 {
 }
 
 .div_subir {
+    display: grid;
     background-color: rgb(46, 46, 46);
     padding: 25px;
     padding-top: 0;
     border-radius: 20px;
 }
 
-.btn_image_album {
+.titulo_form {
+    text-align: center;
+}
+
+.div_image_form {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.btn_image_hover {
+    position: absolute;
     height: 200px;
     width: 200px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.btn_image_hover:hover {
+    background-color: rgba(255, 255, 255, 0.15)
+}
+
+.btn_image {
+    height: 200px;
+    width: 200px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.input_form {
+    padding: 10px;
+    outline: none;
+    border-radius: 25px;
+    border: 0;
+    background-color: rgb(78, 78, 78);
+    color: #eab926;
+    width: -webkit-fill-available;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.input_form::placeholder {
+    color: #eab9267e;
+}
+
+.btn_archivo {
+    background-color: #eab926;
+    border: 0;
+    color: white;
+    border-radius: 25px;
+    padding: 10px;
+    margin-top: 5px;
+    cursor: pointer;
+}
+
+.btn_archivo:hover {
+    background-color: #ffce3b;
+}
+
+.div_botones_subir {
+    display: flex;
+    margin-top: 10px;
+}
+
+.btn_subir_cancion {
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: rgb(68, 195, 106);
+    padding: 10px;
+    border-radius: 25px;
+    border: 0;
+    width: 50%;
+    margin-right: 5px;
+    cursor: pointer;
+}
+
+.btn_subir_cancion:hover {
+    background-color: rgb(120, 213, 148);
+}
+
+.btn_cancelar_cancion {
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: rgb(230, 57, 86);
+    padding: 10px;
+    border-radius: 25px;
+    border: 0;
+    width: 50%;
+    margin-left: 5px;
+    cursor: pointer;
+}
+
+.btn_cancelar_cancion:hover {
+    background-color: rgb(233, 91, 115);
 }
