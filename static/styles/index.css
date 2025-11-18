@@ -7,6 +7,21 @@ body, html {
     position: relative;
 }
 
+::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #4a4a4a;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
 .div_fondo_home {
     padding: 20px;
     position: relative;
@@ -23,6 +38,12 @@ body, html {
     position: relative;
     align-items: center;
     flex-grow: 1;
+}
+
+.img_logo {
+    width: 40px;
+    height: 40px;
+    margin-right: 20px;
 }
 
 .input_buscar {
@@ -56,7 +77,7 @@ body, html {
 .btn_perfil {
     height: 50px;
     width: 50px;
-    background-image: url("/static/images/icons/img_perfil.svg");
+    background-image: url("/media/default/img_perfil.svg");
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
@@ -98,10 +119,42 @@ h1 {
 }
 
 .div_canciones {
+    display: flex;
+    flex-wrap: wrap;
     margin-top: 20px;
     background-color: rgb(35, 35, 35);
     border-radius: 20px;
     padding: 10px;
+    overflow-y: auto;
+    height: 55vh;
+}
+
+.div_cancion {
+    width: 200px;
+    height: fit-content;
+    border-radius: 20px;
+    background-color: #eab926;
+    padding: 10px;
+    margin: 10px;
+}
+
+.imagen_cancion {
+    width: 200px;
+    height: 200px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.nombre_cancion {
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    overflow-x: hidden;
+}
+
+.autor_cancion {
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    overflow-x: hidden;
 }
 
 .div_albumes {
@@ -118,11 +171,12 @@ h1 {
 }
 
 .div_botones_home {
-    position: absolute;
-    display: grid;
+    position: fixed;
+    display: flex;
     right: 0;
     bottom: 0;
-    padding: 20px;
+    margin-right: 20px;
+    margin-bottom: 20px;
 }
 
 .btn_crear {
@@ -137,7 +191,7 @@ h1 {
     border-radius: 100%;
     text-align: center;
     cursor: pointer;
-    margin-bottom: 5px;
+    margin-right: 5px;
 }
 
 .btn_crear:hover {
@@ -155,7 +209,7 @@ h1 {
     background-position: center;
     background-repeat: no-repeat;
     background-size: 50%;
-    margin-top: 5px;
+    margin-left: 5px;
 }
 
 .btn_subir:hover {
@@ -276,4 +330,82 @@ h1 {
 
 .btn_cancelar_cancion:hover {
     background-color: rgb(233, 91, 115);
+}
+
+.reproductor {
+    position: fixed;
+    display: flex;
+    background-color: rgb(70, 70, 70);
+    padding: 20px;
+    left: 50%;
+    bottom: 0;
+    width: 30%;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    transform: translateX(-50%) translateY(200%);
+    align-items: center;
+}
+
+@keyframes reproductor {
+    0%{
+        transform: translateX(-50%) translateY(200%);
+    }
+    100%{
+        transform: translateX(-50%) translateY(0);
+    }
+}
+
+.btn_play {
+    background-color: transparent;
+    background-image: url("/static/images/icons/btn_play.svg");
+    border: 0;
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+}
+
+.btn_pause {
+    background-color: transparent;
+    background-image: url("/static/images/icons/btn_pause.svg");
+    border: 0;
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+}
+
+.div_duracion {
+    position: relative;
+    display: flex;
+    background-color: rgb(90, 90, 90);
+    flex-grow: 1;
+    border-radius: 25px;
+    margin-left: 20px;
+    margin-right: 5px;
+    align-items: center;
+    height: fit-content;
+}
+
+.btn_duracion {
+    position: relative;
+    background-color: #eab926;
+    border: 0;
+    padding: 0;
+    border-radius: 100%;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    transform: translateX(-50%);
+}
+
+.espacio_consumido {
+    position: absolute;
+    background-color: #eab9267d;
+    border-radius: 0;
+    border-bottom-left-radius: 25px;
+    border-top-left-radius: 25px;
+    height: 20px;
+}
+
+.btn_duracion:hover {
+    background-color: #ffd453;
 }

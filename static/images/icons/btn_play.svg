@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+    <style>
+        svg {
+            fill: white;
+        }
+    </style>
+
+    <path transform="translate(6.5)" d="M 5 5 L 83 50 L 5 95 L 5 5" stroke="white" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" />
+</svg>

@@ -11,6 +11,7 @@
         <form class="form_buscar" action="#" method="get">
             {% csrf_token %}
             <div class="div_buscar">
+                <img class="img_logo" src="/static/images/icons/logo.svg" alt="imagen_logo">
                 <input class="input_buscar" type="text" placeholder="Buscar">
                 <button class="btn_buscar" type="submit"></button>
             </div>
@@ -27,9 +28,10 @@
             {% if canciones %}
                 {% for cancion in canciones %}
                     <div class="div_cancion">
-                        <img src="{{ cancion.imagen.url }}" alt="imagen_cancion">
-                        <p><strong>{{ cancion.nombre }}</strong></p>
-                        <p>{{ cancion.autor }}</p>
+                        <img class="imagen_cancion" src="{{ cancion.imagen.url }}" alt="imagen_cancion">
+                        <p class="nombre_cancion"><strong>{{ cancion.nombre }}</strong></p>
+                        <p class="autor_cancion">{{ cancion.autor }}</p>
+                        <audio class="audio_cancion" src="{{ cancion.archivo.url }}"></audio>
                     </div>
                 {% endfor %}
             {% else %}
@@ -54,18 +56,27 @@
             <button class="btn_crear" type="button">Crear</button>
             <button class="btn_subir" type="button" id="btn_subir"></button>
         </div>
+
+        <div class="reproductor" id="reproductor">
+            <audio id="cancion_seleccionada"></audio>
+            <button class="btn_play" type="button" id="btn_play"></button>
+            <div class="div_duracion">
+                <div class="espacio_consumido" id="espacio_consumido"></div>
+                <button class="btn_duracion" id="btn_duracion"></button>
+            </div>
+        </div>
     </div>
 
     <div class="div_fondo" id="div_fondo_crear">
         <form class="div_subir" action="#" enctype="multipart/form-data">
             {% csrf_token %}
             <div class="div_image_form">
-                <img class="btn_image" src="/static/images/icons/img_album.svg" id="btn_image_album" alt="imagen_álbum">
+                <img class="btn_image" src="/media/default/img_album.svg" id="btn_image_album" alt="imagen_álbum">
                 <input id="input_imagen_crear" type="file" style="display: none;" name="imagen">
             </div>
             
-            <input class="input_form" type="text" placeholder="Nombre del álbum">
-            <textarea class="txt_descripcion" name="descripcion" placeholder="Descripción del álbum"></textarea>
+            <input class="input_form" type="text" maxlength="30" placeholder="Nombre del álbum (máximo 30 carácteres)">
+            <textarea class="txt_descripcion" name="descripcion" maxlength="500" placeholder="Descripción del álbum (máximo 500 carácteres)"></textarea>
         </form>
     </div>
 
@@ -76,12 +87,12 @@
 
             <div class="div_image_form">
                 <div class="btn_image_hover" id="btn_image_cancion_hover"></div>
-                <img class="btn_image" src="/static/images/icons/img_album.svg" id="btn_image_cancion" alt="imagen_canción">
+                <img class="btn_image" src="/media/default/img_album.svg" id="btn_image_cancion" alt="imagen_canción">
             </div>
 
             <input id="input_imagen_subir" type="file" style="display: none;" name="imagen_cancion">
-            <input class="input_form" id="input_nombre_cancion" type="text" placeholder="Nombre de la canción" name="nombre">
-            <input class="input_form" id="input_autor_cancion" type="text" placeholder="Autor de la canción" name="autor">
+            <input class="input_form" id="input_nombre_cancion" type="text" maxlength="30" placeholder="Nombre de la canción (máximo 30 carácteres)" name="nombre">
+            <input class="input_form" id="input_autor_cancion" type="text" maxlength="30" placeholder="Autor de la canción (máximo 30 carácteres)" name="autor">
             <button class="btn_archivo" type="button" id="btn_archivo">Seleccionar archivo</button>
             <input id="input_archivo" style="display: none;" type="file" name="archivo">
 

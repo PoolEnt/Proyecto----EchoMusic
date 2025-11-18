@@ -136,26 +136,32 @@ def subir_cancion(request):
             usuario = Usuario.objects.get(id=request.session['usuario_id'])
 
             if imagen_cancion:
-                cancion = Cancion.objects.create(
-                    nombre=nombre,
-                    autor=autor,
-                    imagen=imagen_cancion,
-                    archivo=archivo,
-                    usuario=usuario
-                )
+                if nombre and autor and archivo:
+                    cancion = Cancion.objects.create(
+                        nombre=nombre,
+                        autor=autor,
+                        imagen=imagen_cancion,
+                        archivo=archivo,
+                        usuario=usuario
+                    )
 
-                cancion.save()
+                    cancion.save()
 
-                return redirect('index')
+                    return redirect('index')
+                else:
+                    return redirect('index')
             else:
-                cancion = Cancion.objects.create(
-                    nombre=nombre,
-                    autor=autor,
-                    archivo=archivo,
-                    usuario=usuario
-                )
+                if nombre and autor and archivo:
+                    cancion = Cancion.objects.create(
+                        nombre=nombre,
+                        autor=autor,
+                        archivo=archivo,
+                        usuario=usuario
+                    )
 
-                return redirect('index')
+                    return redirect('index')
+                else:
+                    return redirect('index')
         except Exception as e:
             print(f'ERROR: {e}')
             return redirect('index')
