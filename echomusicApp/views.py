@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 import bcrypt
+import os
 from .models import Usuario, Album, Cancion
+from django.contrib.auth import logout as log_out
 
 def hashear_contraseña(contraseña):
     sal_generada = bcrypt.gensalt()
@@ -12,6 +14,22 @@ def verificar_contraseña(contraseña, hash_almacenado):
     contraseña_bytes = contraseña.encode('utf-8')
     hash_almacenado_bytes = hash_almacenado.encode('utf-8')
     return bcrypt.checkpw(contraseña_bytes, hash_almacenado_bytes)
+
+def imagen_valida(archivo):
+    valid_extensions = ['.png', '.jpg', '.jpeg', '.gif']
+    if not archivo:
+        return True
+    
+    ext = os.path.splitext(archivo.name)[1]
+    return ext.lower() in valid_extensions
+
+def audio_valido(archivo):
+    valid_extensions = ['.mp3', '.wav', '.m4a', '.flac', '.ogg']
+    if not archivo:
+        return True
+    
+    ext = os.path.splitext(archivo.name)[1]
+    return ext.lower() in valid_extensions
 
 # Create your views here.
 
@@ -130,25 +148,36 @@ def subir_cancion(request):
         autor = request.POST.get("autor")
         archivo = request.FILES.get("archivo")
 
-        print("Archivos recibidos:", request.FILES)
-
         try:
             usuario = Usuario.objects.get(id=request.session['usuario_id'])
 
             if imagen_cancion:
-                if nombre and autor and archivo:
+                if imagen_valida(imagen_cancion):
+                    if nombre and autor and archivo:
+                        if audio_valido(archivo):
+                            cancion = Cancion.objects.create(
+                                nombre=nombre,
+                                autor=autor,
+                                imagen=imagen_cancion,
+                                archivo=archivo,
+                                usuario=usuario
+                            )
+
+                            cancion.save()
+
+                            return redirect('index')
+                        else:
+                            return redirect('index')
+                    else:
+                        return redirect('index')
+                else:
                     cancion = Cancion.objects.create(
                         nombre=nombre,
                         autor=autor,
-                        imagen=imagen_cancion,
                         archivo=archivo,
                         usuario=usuario
                     )
 
-                    cancion.save()
-
-                    return redirect('index')
-                else:
                     return redirect('index')
             else:
                 if nombre and autor and archivo:
@@ -166,5 +195,12 @@ def subir_cancion(request):
             print(f'ERROR: {e}')
             return redirect('index')
         
+    else:
+        return redirect('login')
+
+def logout(request):
+    if 'usuario_id' in request.session:
+        log_out(request)
+        return redirect('login')
     else:
         return redirect('login')

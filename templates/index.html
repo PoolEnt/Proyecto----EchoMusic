@@ -16,6 +16,7 @@
                 <button class="btn_buscar" type="submit"></button>
             </div>
             <a class="btn_perfil" href="{% url 'perfil' %}"></a>
+            <a class="btn_logout" href="{% url 'logout' %}"></a>
         </form>
 
         <h1>Tu biblioteca</h1>
@@ -57,12 +58,24 @@
             <button class="btn_subir" type="button" id="btn_subir"></button>
         </div>
 
-        <div class="reproductor" id="reproductor">
-            <audio id="cancion_seleccionada"></audio>
-            <button class="btn_play" type="button" id="btn_play"></button>
-            <div class="div_duracion">
-                <div class="espacio_consumido" id="espacio_consumido"></div>
-                <button class="btn_duracion" id="btn_duracion"></button>
+        <div class="div_reproductor" id="reproductor">
+            <div class="reproductor">
+                <p class="txt_cancion_seleccionada" id="txt_cancion_seleccionada"></p>
+                <audio id="cancion_seleccionada"></audio>
+                <div class="div_play_duracion">
+                    <button class="btn_play" type="button" id="btn_play"></button>
+                    <div class="div_duracion" id="div_duracion">
+                        <div class="espacio_consumido" id="espacio_consumido"></div>
+                        <button class="btn_duracion" draggable="false" id="btn_duracion"></button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="div_volumen">
+                <div class="volumen" id="volumen">
+                    <div class="espacio_volumen" id="espacio_volumen"></div>
+                    <button class="btn_volumen" draggable="false" id="btn_volumen"></button>
+                </div>
             </div>
         </div>
     </div>
@@ -101,6 +114,10 @@
                 <button type="button" class="btn_cancelar_cancion" id="btn_cancelar_cancion">Cancelar</button>
             </div>
         </form>
+    </div>
+
+    <div class="div_cargando" id="div_cargando">
+        <img class="cargando" src="/static/images/icons/logo.svg">
     </div>
 
     <script src="/static/scripts/index.js"></script>

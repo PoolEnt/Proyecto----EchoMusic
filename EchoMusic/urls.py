@@ -27,7 +27,8 @@ urlpatterns = [
     path('registrarse/', views.registrarse, name='registrarse'),
     path('ingresar/', views.ingresar, name='ingresar'),
     path('perfil/', views.perfil, name='perfil'),
-    path('subir_cancion/', views.subir_cancion, name='subir_cancion')
+    path('subir_cancion/', views.subir_cancion, name='subir_cancion'),
+    path('logout/', views.logout, name='logout')
 ]
 
 if settings.DEBUG:
