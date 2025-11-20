@@ -26,8 +26,8 @@ class Usuario(models.Model):
 
 class Album(models.Model):
     nombre = models.CharField(max_length=30, null=False, blank=False, unique=True)
-    descripcion = models.TextField(max_length=500, null=False, blank=False)
-    imagen = models.ImageField(validators=[imagen_valida], null=True, blank=True, default='/default/img_album.svg')
+    descripcion = models.TextField(max_length=100, null=False, blank=False)
+    imagen = models.ImageField(validators=[imagen_valida], null=False, blank=False, default='/default/img_album.svg')
     usuario = models.ForeignKey(Usuario, null=False, blank=False, on_delete=models.CASCADE)
 
 class Cancion(models.Model):

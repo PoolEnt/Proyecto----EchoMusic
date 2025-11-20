@@ -39,13 +39,14 @@ def login(request):
 def index(request):
     if 'usuario_id' in request.session:
         usuario = Usuario.objects.get(id=request.session['usuario_id'])
-        albumes = Album.objects.filter(usuario=usuario)
-        canciones = Cancion.objects.filter(usuario=usuario)
+        albumes = Album.objects.filter(usuario=usuario).order_by('-id')
+        canciones = Cancion.objects.filter(usuario=usuario).order_by('-id')
 
         data = {
             'usuario':usuario,
             'albumes': albumes,
-            'canciones': canciones
+            'canciones': canciones,
+            'filtro':'canciones'
         }
 
         return render(request, 'index.html', data)
@@ -202,5 +203,77 @@ def logout(request):
     if 'usuario_id' in request.session:
         log_out(request)
         return redirect('login')
+    else:
+        return redirect('login')
+
+def crear_album(request):
+    if 'usuario_id' in request.session:
+        imagen_album = request.FILES.get("imagen_album")
+        nombre = request.POST.get("nombre")
+        descripcion = request.POST.get("descripcion")
+
+        try:
+            usuario = Usuario.objects.get(id=request.session['usuario_id'])
+
+            if imagen_album:
+                if imagen_valida(imagen_album):
+                    if nombre and descripcion:
+                        album = Album.objects.create(
+                            nombre=nombre,
+                            descripcion=descripcion,
+                            imagen=imagen_album,
+                            usuario=usuario
+                        )
+
+                        album.save()
+
+                        return redirect('index')
+                    else:
+                        return redirect('index')
+                else:
+                    return redirect('index')
+            else:
+                if nombre and descripcion:
+                    album = Album.objects.create(
+                        nombre=nombre,
+                        descripcion=descripcion,
+                        usuario=usuario
+                    )
+
+                    return redirect('index')
+                else:
+                    return redirect('index')
+
+        except Exception as e:
+            print(f'ERROR: {e}')
+            return redirect('index')
+        
+    else:
+        return redirect('login')
+
+def buscar(request):
+    if 'usuario_id' in request.session:
+        buscar = request.GET.get("buscar")
+        filtro = request.GET.get("filtro")
+
+        try:
+            usuario = Usuario.objects.get(id=request.session['usuario_id'])
+
+            if buscar:
+                canciones = Cancion.objects.filter(nombre__icontains=buscar).order_by('-id')
+                albumes = Album.objects.filter(nombre__icontains=buscar).order_by('-id')
+            
+                data = {
+                    'usuario':usuario,
+                    'albumes': albumes,
+                    'canciones': canciones,
+                    'filtro':filtro
+                }
+
+                return render(request, 'index.html', data)
+            else:
+                return redirect('index')
+        except Exception as e:
+            print(f"ERROR: {e}")
     else:
         return redirect('login')

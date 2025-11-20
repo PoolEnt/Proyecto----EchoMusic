@@ -1,10 +1,12 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-    <style>
-        svg {
-            background-color: red;
-        }
-    </style>
+    <defs>
+        <mask id="mascara">
+            <path d="M 0 0 L 100 0 L 100 100 L 0 100 L 0 0" fill="white" />
+            <path d="M 30 0 L 70 0 L 70 50 L 30 50 30 0" fill="black"/>
+        </mask>
+    </defs>
 
-    <circle cx="50" cy="50" r="45" stroke="blue" stroke-width="10"
-    stroke-dasharray="50" stroke-linecap="round" />
+    <circle cx="50" cy="50" r="45" fill="transparent" stroke="#eab926" stroke-width="10" mask="url(#mascara)" />
+
+    <path d="M 50 0 L 50 40" stroke="#eab926" stroke-width="10"  />
 </svg>

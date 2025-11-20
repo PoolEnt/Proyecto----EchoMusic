@@ -27,10 +27,17 @@ body, html {
     position: relative;
 }
 
+header {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
 .form_buscar {
     display: flex;
     position: relative;
     align-items: center;
+    flex-grow: 1;
 }
 
 .div_buscar {
@@ -158,16 +165,63 @@ h1 {
 }
 
 .div_albumes {
-    display: none;
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 20px;
+    background-color: rgb(35, 35, 35);
+    border-radius: 20px;
+    padding: 10px;
+    overflow-y: auto;
+    height: 55vh;
+}
+
+.div_album {
+    width: 200px;
+    height: 325px;
+    border-radius: 20px;
+    background-color: #eab926;
+    padding: 10px;
+    margin: 10px;
+}
+
+.imagen_album {
+    width: 200px;
+    height: 200px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.nombre_album {
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    overflow-x: hidden;
+}
+
+.descripcion_album {
+    color: white;
+    height: 65px;
+    font-family: Arial, Helvetica, sans-serif;
+    overflow-wrap: break-word;
+    overflow-y: auto;
+}
+
+.descripcion_album::-webkit-scrollbar-thumb {
+    background: #ca921b;
+    border-radius: 10px;
+    cursor: pointer;
 }
 
 .txt_mensaje_home {
     color: #eab926;
     font-family: Arial, Helvetica, sans-serif;
+    font-size: 30px;
     text-align: center;
+    height: fit-content;
+    align-self: center;
     margin: 0;
     margin-top: 25px;
     margin-bottom: 25px;
+    width: 100%;
 }
 
 .div_botones_home {
@@ -295,12 +349,12 @@ h1 {
     background-color: #ffce3b;
 }
 
-.div_botones_subir {
+.div_botones_form {
     display: flex;
     margin-top: 10px;
 }
 
-.btn_subir_cancion {
+.btn_aceptar {
     color: white;
     font-family: Arial, Helvetica, sans-serif;
     background-color: rgb(68, 195, 106);
@@ -312,11 +366,11 @@ h1 {
     cursor: pointer;
 }
 
-.btn_subir_cancion:hover {
+.btn_aceptar:hover {
     background-color: rgb(120, 213, 148);
 }
 
-.btn_cancelar_cancion {
+.btn_cancelar {
     color: white;
     font-family: Arial, Helvetica, sans-serif;
     background-color: rgb(230, 57, 86);
@@ -328,7 +382,7 @@ h1 {
     cursor: pointer;
 }
 
-.btn_cancelar_cancion:hover {
+.btn_cancelar:hover {
     background-color: rgb(233, 91, 115);
 }
 
@@ -489,6 +543,9 @@ h1 {
 
 .btn_logout {
     background-image: url("/static/images/icons/btn_logout.svg");
+    height: 30px;
+    width: 30px;
+    margin-left: 20px;
 }
 
 .div_cargando {
@@ -518,4 +575,22 @@ h1 {
     100%{
         transform: rotate(360deg);
     }
+}
+
+.txt_descripcion {
+    resize: none;
+    height: 75px;
+    padding: 10px;
+    outline: none;
+    border-radius: 25px;
+    border: 0;
+    background-color: rgb(78, 78, 78);
+    color: #eab926;
+    width: -webkit-fill-available;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.txt_descripcion::placeholder {
+    color: #eab9267e;
 }
