@@ -35,5 +35,8 @@ class Cancion(models.Model):
     autor = models.CharField(max_length=30, null=False, blank=False)
     imagen = models.ImageField(validators=[imagen_valida], null=False, blank=False, default='/default/img_album.svg')
     archivo = models.FileField(validators=[audio_valido], null=False, blank=False, unique=True)
-    album = models.ForeignKey(Album, null=True, blank=True, on_delete=models.CASCADE)
     usuario = models.ForeignKey(Usuario, null=False, blank=False, on_delete=models.CASCADE)
+
+class Album_Cancion(models.Model):
+    album = models.ForeignKey(Album, null=False, blank=False, on_delete=models.CASCADE)
+    cancion = models.ForeignKey(Cancion, null=False, blank=False, on_delete=models.CASCADE)

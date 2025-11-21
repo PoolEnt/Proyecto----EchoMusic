@@ -1,5 +1,8 @@
 body, html {
     background-color: rgb(16, 16, 16);
+    background-image: url("/static/images/decorative/background_login.svg");
+    background-repeat: no-repeat;
+    background-size: cover;
     margin: 0;
     display: grid;
     height: 100%;

@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 import bcrypt
 import os
-from .models import Usuario, Album, Cancion
+from .models import Usuario, Album, Cancion, Album_Cancion
 from django.contrib.auth import logout as log_out
 
 def hashear_contraseña(contraseña):
@@ -260,8 +260,8 @@ def buscar(request):
             usuario = Usuario.objects.get(id=request.session['usuario_id'])
 
             if buscar:
-                canciones = Cancion.objects.filter(nombre__icontains=buscar).order_by('-id')
-                albumes = Album.objects.filter(nombre__icontains=buscar).order_by('-id')
+                canciones = Cancion.objects.filter(nombre__icontains=buscar, usuario=usuario).order_by('-id')
+                albumes = Album.objects.filter(nombre__icontains=buscar, usuario=usuario).order_by('-id')
             
                 data = {
                     'usuario':usuario,
@@ -275,5 +275,40 @@ def buscar(request):
                 return redirect('index')
         except Exception as e:
             print(f"ERROR: {e}")
+    else:
+        return redirect('login')
+
+def actualizar(request):
+    if 'usuario_id' in request.session:
+        canciones = request.POST.getlist('cancion_id[]')
+        album_id = request.POST.get('album_id')
+
+        try:
+            album_id = int(album_id)
+            usuario = Usuario.objects.get(id=request.session['usuario_id'])
+            album = Album.objects.get(id=album_id, usuario_id=usuario.id)
+
+            if canciones:
+                for cancion_id in canciones:
+                    if cancion_id != '':
+                        id_cancion = int(cancion_id)
+                        cancion = Cancion.objects.get(id=id_cancion)
+                        relacion_si = Album_Cancion.objects.filter(album=album, cancion=cancion)
+                        if relacion_si:
+                            pass
+                        else:
+                            album_cancion = Album_Cancion.objects.create(
+                                album=album,
+                                cancion=cancion
+                            )
+                    else:
+                        pass
+                
+                return redirect('index')
+            else:
+                return redirect('index')
+        except Exception as e:
+            print(f"ERROR: {e}")
+            return redirect('index')
     else:
         return redirect('login')

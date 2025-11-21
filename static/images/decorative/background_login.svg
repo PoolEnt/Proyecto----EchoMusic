@@ -1,36 +1,69 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 177.78 100">
-    <style>
-        svg {
-        }
-    </style>
-
     <defs>
-        <radialGradient id="gradiente_burbuja" cx="50%" cy="50%" r="50%">
+        <filter id="efecto-blur_1">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="0.5" />
+        </filter>
+
+        <filter id="efecto-blur_2">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="1" />
+        </filter>
+    </defs>
+    
+    <g opacity="0.75">
+        <radialGradient id="gradiente_burbuja_1" cx="50%" cy="50%" r="50%">
             <stop offset="0%" stop-color="#ffdd76" />
             <stop offset="80%" stop-color="#ff9335" />
         </radialGradient>
-    </defs>
 
-    <circle cx="20" cy="30" r="7" fill="url(#gradiente_burbuja)" />
-    <circle cx="25" cy="50" r="8" />
-    <circle cx="7" cy="70" r="5" />
-    <circle cx="50" cy="0" r="7" />
-    <circle cx="40" cy="80" r="6" />
-    <circle cx="60" cy="20" r="7" />
-    <circle cx="80" cy="55" r="6" />
-    <circle cx="65" cy="100" r="7" />
-    <circle cx="95" cy="80" r="7" />
-    <circle cx="100" cy="10" r="8" />
-    <circle cx="115" cy="25" r="7" />
-    <circle cx="100" cy="40" r="6" />
-    <circle cx="120" cy="60" r="7" />
-    <circle cx="140" cy="-5" r="7" />
-    <circle cx="135" cy="90" r="6" />
-    <circle cx="145" cy="15" r="7" />
-    <circle cx="145" cy="15" r="7" />
-    <circle cx="160" cy="35" r="6" />
-    <circle cx="150" cy="46" r="5" />
-    <circle cx="170" cy="70" r="4" />
-    <circle cx="0" cy="0" r="8" />
-    <circle cx="177.78" cy="100" r="8" />
+        <radialGradient id="gradiente_burbuja_2" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#ffd000" />
+            <stop offset="80%" stop-color="#ff7f35" />
+        </radialGradient>
+
+        <radialGradient id="gradiente_burbuja_3" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#ffecce" />
+            <stop offset="80%" stop-color="#ffc157" />
+        </radialGradient>
+
+        <radialGradient id="gradiente_burbuja_4" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#ffecce" />
+            <stop offset="80%" stop-color="rgba(255,193,87,0.479)" />
+        </radialGradient>
+    
+        <circle cx="20" cy="30" r="7" fill="url(#gradiente_burbuja_1)" />
+        <circle cx="25" cy="50" r="8" fill="url(#gradiente_burbuja_2)" filter="url(#efecto-blur_1)" />
+        <circle cx="7" cy="70" r="5" fill="url(#gradiente_burbuja_3)" />
+        <circle cx="50" cy="0" r="7" fill="url(#gradiente_burbuja_4)" filter="url(#efecto-blur_1)" />
+        <circle cx="40" cy="80" r="6" fill="url(#gradiente_burbuja_1)" />
+        <circle cx="60" cy="20" r="7" fill="url(#gradiente_burbuja_2)" filter="url(#efecto-blur_1)" />
+        <circle cx="80" cy="55" r="6" fill="url(#gradiente_burbuja_3)"  />
+        <circle cx="65" cy="100" r="7" fill="url(#gradiente_burbuja_4)" filter="url(#efecto-blur_1)" />
+        <circle cx="95" cy="80" r="7" fill="url(#gradiente_burbuja_1)" />
+        <circle cx="100" cy="10" r="8" fill="url(#gradiente_burbuja_2)" filter="url(#efecto-blur_1)" />
+        <circle cx="115" cy="25" r="7" fill="url(#gradiente_burbuja_3)" />
+        <circle cx="100" cy="40" r="6" fill="url(#gradiente_burbuja_4)" filter="url(#efecto-blur_1)" />
+        <circle cx="120" cy="60" r="7" fill="url(#gradiente_burbuja_1)" />
+        <circle cx="140" cy="-5" r="7" fill="url(#gradiente_burbuja_2)" filter="url(#efecto-blur_1)" />
+        <circle cx="135" cy="90" r="6" fill="url(#gradiente_burbuja_3)" />
+        <circle cx="145" cy="15" r="7" fill="url(#gradiente_burbuja_4)" filter="url(#efecto-blur_1)" />
+        <circle cx="145" cy="15" r="7" fill="url(#gradiente_burbuja_1)" />
+        <circle cx="160" cy="35" r="6" fill="url(#gradiente_burbuja_2)" filter="url(#efecto-blur_1)" />
+        <circle cx="150" cy="46" r="5" fill="url(#gradiente_burbuja_3)" />
+        <circle cx="170" cy="70" r="4" fill="url(#gradiente_burbuja_4)" filter="url(#efecto-blur_1)" />
+        <circle cx="0" cy="0" r="8" fill="url(#gradiente_burbuja_1)" />
+        <circle cx="177.78" cy="100" r="8" fill="url(#gradiente_burbuja_2)" filter="url(#efecto-blur)" />
+    </g>
+
+        <linearGradient id="gradiente_fondo_1" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="transparent" />
+            <stop offset="100%" stop-color="#ffbf00" />
+        </linearGradient>
+
+        <linearGradient id="gradiente_fondo_2" x1="0%" y1="100%" x2="0%" y2="0%">
+            <stop offset="0%" stop-color="transparent" />
+            <stop offset="100%" stop-color="#ffc28c" />
+        </linearGradient>
+
+    <path filter="url(#efecto-blur_2)" opacity="0.5" d="M 0 0 L 177.78 0 L 177.78 100 L 0 100" fill="url(#gradiente_fondo_1)" />
+    <path filter="url(#efecto-blur_2)" opacity="0.5" d="M 0 0 L 177.78 0 L 177.78 100 L 0 100" fill="url(#gradiente_fondo_2)" />
 </svg>

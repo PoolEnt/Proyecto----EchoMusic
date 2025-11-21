@@ -267,3 +267,42 @@ btn_filtro_albumes.addEventListener("click", function(){
     filtro.value = "albumes"
 })
 
+const btn_contenido = document.querySelectorAll(".btn_contenido")
+const titulo_contenido = document.getElementById("titulo_contenido")
+
+btn_contenido.forEach(btn => {
+    btn.addEventListener("click", function(){
+        const div_btn_contenido = btn.parentElement
+        const div_album = div_btn_contenido.parentElement
+        const div_fondo_contenido = div_album.nextElementSibling
+        const div_contenido = div_fondo_contenido.querySelector(".div_contenido")
+        const btn_cerrar = div_contenido.querySelector(".btn_cerrar")
+
+        div_fondo_contenido.style.display = "grid"
+
+        btn_cerrar.addEventListener("click", function(){
+            div_fondo_contenido.style.display = "none"
+        })
+    })
+})
+
+const div_cancion_lista = document.querySelectorAll(".div_cancion_lista")
+
+div_cancion_lista.forEach(div_cancion => {
+    const btn_seleccionar_cancion = div_cancion.querySelector(".btn_seleccionar_cancion")
+    const cancion_id = div_cancion.lastElementChild
+    const id_cancion = div_cancion.querySelector(".cancion_id")
+    let estado = false
+
+    btn_seleccionar_cancion.addEventListener("click", function(){
+        if (estado == false){
+            btn_seleccionar_cancion.className = "btn_cancion_seleccionada"
+            cancion_id.value = id_cancion.value
+            estado = true
+        }else {
+            btn_seleccionar_cancion.className = "btn_seleccionar_cancion"
+            cancion_id.value = ""
+            estado = false
+        }
+    })
+})

@@ -31,6 +31,7 @@ urlpatterns = [
     path('logout/', views.logout, name='logout'),
     path('crear_album/', views.crear_album, name='crear_album'),
     path('buscar/', views.buscar, name='buscar'),
+    path('actualizar/', views.actualizar, name='actualizar')
 ]
 
 if settings.DEBUG:

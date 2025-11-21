@@ -51,6 +51,9 @@ header {
     width: 40px;
     height: 40px;
     margin-right: 20px;
+    background-image: url("/static/images/icons/logo.svg");
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .input_buscar {
@@ -272,7 +275,7 @@ h1 {
 
 .div_fondo {
     display: none;
-    position: absolute;
+    position: fixed;
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
@@ -593,4 +596,176 @@ h1 {
 
 .txt_descripcion::placeholder {
     color: #eab9267e;
+}
+
+.div_fondo_contenido {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+    justify-content: center;
+    align-items: center;
+}
+
+.div_contenidos {
+    position: relative;
+    display: flex;
+}
+
+.div_contenido {
+    position: relative;
+    display: grid;
+    background-color: rgb(46, 46, 46);
+    padding: 25px;
+    padding-top: 0;
+    border-radius: 20px;
+    width: 600px;
+    margin-right: 10px;
+}
+
+.btn_cerrar {
+    background-color: transparent;
+    background-image: url("/static/images/icons/btn_cerrar.svg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    border: 0;
+    position: absolute;
+    height: 20px;
+    width: 20px;
+    right: 0;
+    margin: 20px;
+    cursor: pointer;
+}
+
+.lista_canciones {
+    display: block;
+    height: 300px;
+    overflow-y: auto;
+    background-color: #424242;
+    border-radius: 20px;
+}
+
+.div_cancion_album {
+    display: flex;
+    border-radius: 20px;
+    padding: 10px;
+    height: fit-content;
+    background-color: #525252;
+    align-items: center;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.img_cancion_album {
+    border-radius: 20px;
+    height: 50px;
+    width: 50px;
+}
+
+.div_lista_btn {
+    display: grid;
+    position: relative;
+    margin-left: 10px;
+}
+
+.div_lista_canciones {
+    position: relative;
+    display: grid;
+    background-color: rgb(46, 46, 46);
+    padding: 25px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border-radius: 0;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    width: 350px;
+    height: 350px;
+    overflow-y: auto;
+}
+
+.div_cancion_lista {
+    display: flex;
+    align-items: center;
+    background-color: #424242;
+    padding: 10px;
+    border-radius: 25px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.nombre_cancion_album {
+    color: #eab926;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
+    margin: 0;
+}
+
+.valor_cancion_album {
+    color: #eab926;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
+    margin: 0;
+    width: fit-content;
+}
+
+.btn_seleccionar_cancion {
+    background-color: rgba(89, 75, 34, 0.659);
+    border: 1px solid #eab926;
+    border-radius: 5px;
+    width: 20px;
+    height: 20px;
+    margin-left: auto;
+    cursor: pointer;
+}
+
+.btn_cancion_seleccionada {
+    background-color: #eab926;
+    border: 1px solid #eab926;
+    background-image: url("/static/images/icons/btn_cancion_seleccionada.svg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    border-radius: 5px;
+    width: 20px;
+    height: 20px;
+    margin-left: auto;
+    cursor: pointer;
+    padding: 5px;
+}
+
+.div_btn_contenido {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.btn_contenido {
+    height: 15px;
+    width: 30px;
+    background-color: transparent;
+    background-image: url("/static/images/icons/btn_contenido.svg");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    border: 0;
+    cursor: pointer;
+}
+
+.btn_actualizar {
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #eab926;
+    border-radius: 25px;
+    padding: 10px;
+    margin-top: 20px;
+    cursor: pointer;
+}
+
+.btn_actualizar:hover {
+    background-color: #ffd148;
 }
