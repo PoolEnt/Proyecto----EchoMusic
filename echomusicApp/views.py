@@ -42,6 +42,9 @@ def index(request):
         albumes = Album.objects.filter(usuario=usuario).order_by('-id')
         canciones = Cancion.objects.filter(usuario=usuario).order_by('-id')
 
+        for album in albumes:
+            album.ids_canciones = set(album.album_cancion_set.values_list('cancion', flat=True))
+
         data = {
             'usuario':usuario,
             'albumes': albumes,
@@ -282,11 +285,23 @@ def actualizar(request):
     if 'usuario_id' in request.session:
         canciones = request.POST.getlist('cancion_id[]')
         album_id = request.POST.get('album_id')
+        album_nombre = request.POST.get('album_nombre')
+        canciones_quitar = request.POST.getlist('cancion_quitar[]')
 
         try:
             album_id = int(album_id)
             usuario = Usuario.objects.get(id=request.session['usuario_id'])
             album = Album.objects.get(id=album_id, usuario_id=usuario.id)
+
+            for id_quitar in canciones_quitar:
+                if id_quitar != '':
+                    id_cancion_quitar = int(id_quitar)
+                    cancion_quit = Cancion.objects.get(id=id_cancion_quitar)
+                    relacion = Album_Cancion.objects.filter(album=album, cancion=cancion_quit)
+                    relacion.delete()
+
+            album.nombre = album_nombre
+            album.save()
 
             if canciones:
                 for cancion_id in canciones:

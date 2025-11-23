@@ -141,7 +141,7 @@ h1 {
 
 .div_cancion {
     width: 200px;
-    height: fit-content;
+    height: 300px;
     border-radius: 20px;
     background-color: #eab926;
     padding: 10px;
@@ -159,6 +159,7 @@ h1 {
     color: white;
     font-family: Arial, Helvetica, sans-serif;
     overflow-x: hidden;
+    flex-wrap: nowrap;
 }
 
 .autor_cancion {
@@ -237,8 +238,8 @@ h1 {
 }
 
 .btn_crear {
-    width: 80px;
-    height: 80px;
+    width: 70px;
+    height: 70px;
     border: 0;
     background-color: #f0a10e;
     color: white;
@@ -256,8 +257,8 @@ h1 {
 }
 
 .btn_subir {
-    width: 80px;
-    height: 80px;
+    width: 70px;
+    height: 70px;
     border: 0;
     background-color: #ad56ff;
     border-radius: 100%;
@@ -294,6 +295,17 @@ h1 {
 
 .titulo_form {
     text-align: center;
+}
+
+.titulo_form_input {
+    font-size: 25px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    outline: none;
+    border: 0;
+    color: #eab926;
+    text-align: center;
+    background-color: transparent;
 }
 
 .div_image_form {
@@ -394,7 +406,7 @@ h1 {
     display: flex;
     left: 50%;
     bottom: 0;
-    width: 30%;
+    width: 40%;
     transform: translateX(-50%) translateY(200%);
 }
 
@@ -641,15 +653,33 @@ h1 {
     cursor: pointer;
 }
 
+.btn_quitar_cancion {
+    background-color: transparent;
+    background-image: url("/static/images/icons/btn_cerrar.svg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    border: 0;
+    margin-right: 20px;
+    position: absolute;
+    height: 20px;
+    width: 20px;
+    right: 0;
+    cursor: pointer;
+}
+
 .lista_canciones {
     display: block;
     height: 300px;
     overflow-y: auto;
     background-color: #424242;
     border-radius: 20px;
+    padding: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
 }
 
 .div_cancion_album {
+    position: relative;
     display: flex;
     border-radius: 20px;
     padding: 10px;
@@ -661,7 +691,7 @@ h1 {
 }
 
 .img_cancion_album {
-    border-radius: 20px;
+    border-radius: 10px;
     height: 50px;
     width: 50px;
 }
@@ -674,14 +704,11 @@ h1 {
 
 .div_lista_canciones {
     position: relative;
-    display: grid;
     background-color: rgb(46, 46, 46);
     padding: 25px;
     padding-top: 20px;
     padding-bottom: 20px;
-    border-radius: 0;
-    border-top-left-radius: 20px;
-    border-bottom-left-radius: 20px;
+    border-radius: 20px;
     width: 350px;
     height: 350px;
     overflow-y: auto;
@@ -692,7 +719,7 @@ h1 {
     align-items: center;
     background-color: #424242;
     padding: 10px;
-    border-radius: 25px;
+    border-radius: 15px;
     margin-top: 5px;
     margin-bottom: 5px;
 }
@@ -763,6 +790,7 @@ h1 {
     border-radius: 25px;
     padding: 10px;
     margin-top: 20px;
+    border: 0;
     cursor: pointer;
 }
 

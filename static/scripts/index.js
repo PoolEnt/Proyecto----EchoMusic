@@ -20,6 +20,8 @@ if (filtro.value == 'canciones'){
 
 let isDragging_volumen = false
 let isDragging_duracion = false
+let reproducir_cancion = false
+let cancion_actual = 0
 
 const btn_subir = document.getElementById("btn_subir")
 const div_fondo_subir = document.getElementById("div_fondo_subir")
@@ -66,7 +68,7 @@ btn_archivo.addEventListener("click", function(){
 
 btn_cancelar_cancion.addEventListener("click", function(){
     input_imagen_subir.value = ""
-    btn_image_cancion.src = "/media/default/img_album.svg"
+    btn_image_cancion.src = "/media/default/album.svg"
     input_nombre_cancion.value = ""
     input_archivo.value = ""
     input_autor_cancion.value = ""
@@ -99,6 +101,7 @@ document.addEventListener('keydown', function(event) {
 btn_play.addEventListener("click", function(){
     if (cancion_seleccionada.src !== "") {
         if (cancion_seleccionada.paused) {
+            reproducir_cancion = true
             cancion_seleccionada.play()
             btn_play.className = "btn_pause"
         } else {
@@ -119,7 +122,11 @@ cancion_seleccionada.addEventListener("timeupdate", function(){
             btn_duracion.style.left = `${tiempo_porcentaje}%`
 
             if (tiempo >= duracion) {
-                btn_play.className = "btn_play"
+                if (reproducir_cancion == false){
+                    btn_play.className = "btn_pause"
+                }else {
+                    btn_play.className = "btn_play"
+                }
             }
         }
     }
@@ -142,7 +149,7 @@ imagen_canciones.forEach(imagen => {
         espacio_consumido.style.width = "0%"
         btn_duracion.style.left = "0%"
         isDragging_duracion = false;
-        
+        reproducir_cancion = true
         cancion_seleccionada.play()
     });
 });
@@ -277,11 +284,30 @@ btn_contenido.forEach(btn => {
         const div_fondo_contenido = div_album.nextElementSibling
         const div_contenido = div_fondo_contenido.querySelector(".div_contenido")
         const btn_cerrar = div_contenido.querySelector(".btn_cerrar")
+        const titulo_form_input = btn_cerrar.nextElementSibling
+        const texto_titulo = titulo_form_input.value
 
         div_fondo_contenido.style.display = "grid"
 
         btn_cerrar.addEventListener("click", function(){
+            const div_cancion_album = document.querySelectorAll(".div_cancion_album")
+            const div_cancion_lista = document.querySelectorAll(".div_cancion_lista")
+            div_cancion_lista.forEach(div_cancion => {
+                const primer_hijo = div_cancion.firstElementChild
+                const btn_seleccionar_cancion = primer_hijo.nextElementSibling
+                const cancion_id = div_cancion.lastElementChild
+                cancion_id.value = ''
+                btn_seleccionar_cancion.className = "btn_seleccionar_cancion"
+            })
+
+            div_cancion_album.forEach(div => {
+                const cancion_id = div.nextElementSibling
+                const cancion_quitar = cancion_id.nextElementSibling
+                cancion_quitar.value = ''
+                div.style.display = 'flex'
+            })
             div_fondo_contenido.style.display = "none"
+            titulo_form_input.value = texto_titulo
         })
     })
 })
@@ -291,18 +317,90 @@ const div_cancion_lista = document.querySelectorAll(".div_cancion_lista")
 div_cancion_lista.forEach(div_cancion => {
     const btn_seleccionar_cancion = div_cancion.querySelector(".btn_seleccionar_cancion")
     const cancion_id = div_cancion.lastElementChild
-    const id_cancion = div_cancion.querySelector(".cancion_id")
-    let estado = false
+    const id_cancion = cancion_id.previousElementSibling
 
     btn_seleccionar_cancion.addEventListener("click", function(){
-        if (estado == false){
+        if (btn_seleccionar_cancion.className == "btn_seleccionar_cancion"){
             btn_seleccionar_cancion.className = "btn_cancion_seleccionada"
             cancion_id.value = id_cancion.value
-            estado = true
         }else {
             btn_seleccionar_cancion.className = "btn_seleccionar_cancion"
             cancion_id.value = ""
-            estado = false
         }
     })
 })
+
+const btn_quitar_cancion = document.querySelectorAll(".btn_quitar_cancion")
+
+btn_quitar_cancion.forEach(boton => {
+    boton.addEventListener("click", function(){
+        const div_cancion_album = boton.parentElement
+        const cancion_id = div_cancion_album.nextElementSibling
+        const cancion_quitar = cancion_id.nextElementSibling
+        cancion_quitar.value = cancion_id.value
+        div_cancion_album.style.display = "none"
+    })
+})
+
+const imagen_albumes = document.querySelectorAll(".imagen_album")
+let album_seleccionado = ""
+
+imagen_albumes.forEach(imagen => {
+    const padre = imagen.parentElement
+    const div_canciones_album = padre.lastElementChild
+    const canciones = div_canciones_album.querySelectorAll('audio')
+
+    const nombre_cancion = imagen.nextElementSibling
+    imagen.addEventListener("click", function(){
+        album_seleccionado = imagen
+        if(canciones.length >= 1){
+            cancion_actual = 0
+            reproducir_cancion = false
+            txt_cancion_seleccionada.textContent = nombre_cancion.textContent
+            reproductor.style.animationName = "reproductor"
+            reproductor.style.animationDuration = "500ms"
+            reproductor.style.animationFillMode = "forwards"
+            btn_play.className = "btn_pause"
+            espacio_consumido.style.width = "0%"
+            btn_duracion.style.left = "0%"
+            isDragging_duracion = false;
+
+            reproducir_siguiente(album_seleccionado)
+        }
+    });
+});
+
+cancion_seleccionada.addEventListener('ended', function(){
+    if (reproducir_cancion == false){
+        setTimeout(() => {
+            reproducir_siguiente(album_seleccionado)
+        }, 2000)
+    }else{
+        btn_play.className = "btn_pause"
+        setTimeout(() => {
+            cancion_seleccionada.play()
+        }, 2000)
+    }
+})
+
+function reproducir_siguiente(album_seleccionado) {
+    if (reproducir_cancion == false) {
+        const padre = album_seleccionado.parentElement
+        const div_canciones_album = padre.lastElementChild
+        const canciones = div_canciones_album.querySelectorAll('audio')
+        const playlist = Array.from(canciones)
+
+        if (cancion_actual < playlist.length){
+            cancion_seleccionada.src = playlist[cancion_actual].src
+            cancion_seleccionada.play()
+            btn_play.className = "btn_pause"
+            cancion_actual++
+        }else {
+            cancion_actual = 0
+            cancion_seleccionada.src = playlist[cancion_actual].src
+            cancion_seleccionada.play()
+            btn_play.className = "btn_pause"
+            cancion_actual++
+        }
+    }
+}

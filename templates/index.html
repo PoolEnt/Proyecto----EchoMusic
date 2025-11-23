@@ -53,44 +53,58 @@
                         <img class="imagen_album" src="{{ album.imagen.url }}" alt="imagen_album">
                         <p class="nombre_album"><strong>{{ album.nombre }}</strong></p>
                         <p class="descripcion_album">{{ album.descripcion }}</p>
+                        <div style="display: none;" class="div_canciones_album">
+                            {% for A_C in album.album_cancion_set.all %}
+                                <audio class="audio_cancion_album" src="{{ A_C.cancion.archivo.url }}"></audio>
+                            {% endfor %}
+                        </div>
                     </div>
 
                     <div class="div_fondo_contenido">
                         <div class="div_contenidos">
-                            <div class="div_contenido">
-                                <button class="btn_cerrar"></button>
-                                <h1 class="titulo_form">{{ album.nombre }}</h1>
-                                <div class="lista_canciones">
-                                    {% if album.album_cancion_set.all %}
-                                        {% for A_C in album.album_cancion_set.all %}
-                                            <div class="div_cancion_album">
-                                                <img class="img_cancion_album" src="{{ A_C.cancion.imagen.url }}" alt="imagen_cancion_{{ A_C.cancion.id }}">    
-                                                <div style="display: grid; margin-left: 10px;">
-                                                    <p class="valor_cancion_album">{{ A_C.cancion.nombre }}</p>
-                                                    <p class="valor_cancion_album">{{ A_C.cancion.autor }}</p>
+                            <form style="position: relative; display: flex;" action="{% url 'actualizar' %}" method="post">
+                                <div class="div_contenido">
+                                    <button type="button" class="btn_cerrar"></button>
+                                    <input class="titulo_form_input" maxlength="30" type="text" name="album_nombre" value="{{ album.nombre }}">
+                                    <div class="lista_canciones">
+                                        {% if album.album_cancion_set.all %}
+                                            {% for A_C in album.album_cancion_set.all %}
+                                                <div class="div_cancion_album">
+                                                    <img class="img_cancion_album" src="{{ A_C.cancion.imagen.url }}" alt="imagen_cancion_{{ A_C.cancion.id }}">    
+                                                    <div style="display: grid; margin-left: 10px;">
+                                                        <p class="valor_cancion_album">{{ A_C.cancion.nombre }}</p>
+                                                        <p class="valor_cancion_album">{{ A_C.cancion.autor }}</p>
+                                                    </div>
+                                                    <button type="button" class="btn_quitar_cancion"></button>
                                                 </div>
+                                                <input type="hidden" class="cancion_id" value="{{ A_C.cancion.id }}">
+                                                <input type="hidden" name="cancion_quitar[]">
+                                            {% endfor %}
+                                        {% else %}
+                                            <div style="display: grid; height: 100%;">
+                                                <h3 class="txt_mensaje_home">No hay canciones en este álbum</h3>
                                             </div>
-                                        {% endfor %}
-                                    {% else %}
-                                        <h3 class="txt_mensaje_home">No hay canciones en este álbum</h3>
-                                    {% endif %}
+                                        {% endif %}
+                                    </div>
                                 </div>
-                            </div>
 
-                            <form class="div_lista_btn" action="{% url 'actualizar' %}" method="post">
-                                {% csrf_token %}
-                                <div class="div_lista_canciones">
-                                    {% for cancion in canciones %}
-                                        <div class="div_cancion_lista">
-                                            <p class="nombre_cancion_album"><strong>{{ cancion.nombre }}</strong> de {{ cancion.autor }}</p>
-                                            <button class="btn_seleccionar_cancion" type="button"></button>
-                                            <input class="cancion_id" type="hidden" value="{{ cancion.id }}">
-                                            <input type="hidden" name="cancion_id[]">
-                                        </div>
-                                    {% endfor %}
+                                <div class="div_lista_btn">
+                                    {% csrf_token %}
+                                    <div class="div_lista_canciones">
+                                        {% for cancion in canciones %}
+                                            {% if not cancion.id in album.ids_canciones %}
+                                                <div class="div_cancion_lista">
+                                                    <p class="nombre_cancion_album"><strong>{{ cancion.nombre }}</strong> de {{ cancion.autor }}</p>
+                                                    <button class="btn_seleccionar_cancion" type="button"></button>
+                                                    <input class="cancion_id" type="hidden" value="{{ cancion.id }}">
+                                                    <input type="hidden" name="cancion_id[]">
+                                                </div>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </div>
+                                    <input type="hidden" value="{{ album.id }}" name="album_id">
+                                    <button class="btn_actualizar" type="submit">Actualizar</button>
                                 </div>
-                                <input type="hidden" value="{{ album.id }}" name="album_id">
-                                <button class="btn_actualizar" type="submit">Actualizar</button>
                             </form>
                         </div>
                     </div>
