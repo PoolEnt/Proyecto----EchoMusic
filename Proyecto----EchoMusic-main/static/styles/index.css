@@ -1,0 +1,814 @@
+body, html {
+    background-color: rgb(16, 16, 16);
+    margin: 0;
+    display: grid;
+    height: 100%;
+    width: 100%;
+    position: relative;
+}
+
+::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #4a4a4a;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.div_fondo_home {
+    padding: 20px;
+    position: relative;
+}
+
+header {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.form_buscar {
+    display: flex;
+    position: relative;
+    align-items: center;
+    flex-grow: 1;
+}
+
+.div_buscar {
+    display: flex;
+    position: relative;
+    align-items: center;
+    flex-grow: 1;
+}
+
+.img_logo {
+    width: 40px;
+    height: 40px;
+    margin-right: 20px;
+    background-image: url("/static/images/icons/logo.svg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.input_buscar {
+    flex-grow: 1;
+    padding: 10px;
+    outline: none;
+    border-radius: 25px;
+    border: 0;
+    background-color: rgb(78, 78, 78);
+    color: #eab926;
+}
+
+.input_buscar::placeholder {
+    color: #eab9267e;
+}
+
+.btn_buscar {
+    position: absolute;
+    right: 0;
+    background-color: transparent;
+    border: 0;
+    height: 20px;
+    width: 20px;
+    background-image: url("/static/images/icons/btn_buscar.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.btn_perfil {
+    height: 50px;
+    width: 50px;
+    background-image: url("/media/default/img_perfil.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    border-radius: 100%;
+    margin-left: 20px;
+}
+
+h1 {
+    font-family: Arial, Helvetica, sans-serif;
+    color: #eab926;
+}
+
+.div_filtros {
+    display: flex;
+}
+
+.btn_filtro_act {
+    color: #eab926;
+    background-color: white;
+    border: 2px solid #eab926;
+    border-radius: 25px;
+    padding: 10px;
+    font-size: 15px;
+    font-weight: bold;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.btn_filtro_des {
+    color: white;
+    background-color: #eab926;
+    border: 2px solid #eab926;
+    border-radius: 25px;
+    padding: 10px;
+    font-size: 15px;
+    font-weight: bold;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.div_canciones {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 20px;
+    background-color: rgb(35, 35, 35);
+    border-radius: 20px;
+    padding: 10px;
+    overflow-y: auto;
+    height: 55vh;
+}
+
+.div_cancion {
+    width: 200px;
+    height: 325px;
+    border-radius: 20px;
+    background-color: #eab926;
+    padding: 10px;
+    margin: 10px;
+}
+
+.imagen_cancion {
+    width: 200px;
+    height: 200px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.nombre_cancion {
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    overflow-x: hidden;
+    flex-wrap: nowrap;
+}
+
+.autor_cancion {
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    overflow-x: hidden;
+}
+
+.div_albumes {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 20px;
+    background-color: rgb(35, 35, 35);
+    border-radius: 20px;
+    padding: 10px;
+    overflow-y: auto;
+    height: 55vh;
+}
+
+.div_album {
+    width: 200px;
+    height: 325px;
+    border-radius: 20px;
+    background-color: #eab926;
+    padding: 10px;
+    margin: 10px;
+}
+
+.imagen_album {
+    width: 200px;
+    height: 200px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.nombre_album {
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    overflow-x: hidden;
+}
+
+.descripcion_album {
+    color: white;
+    height: 65px;
+    font-family: Arial, Helvetica, sans-serif;
+    overflow-wrap: break-word;
+    overflow-y: auto;
+}
+
+.descripcion_album::-webkit-scrollbar-thumb {
+    background: #ca921b;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.txt_mensaje_home {
+    color: #eab926;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 30px;
+    text-align: center;
+    height: fit-content;
+    align-self: center;
+    margin: 0;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    width: 100%;
+}
+
+.div_botones_home {
+    position: fixed;
+    display: flex;
+    right: 0;
+    bottom: 0;
+    margin-right: 20px;
+    margin-bottom: 20px;
+}
+
+.btn_crear {
+    width: 70px;
+    height: 70px;
+    border: 0;
+    background-color: #f0a10e;
+    color: white;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+    border-radius: 100%;
+    text-align: center;
+    cursor: pointer;
+    margin-right: 5px;
+}
+
+.btn_crear:hover {
+    background-color: #ffad41;
+}
+
+.btn_subir {
+    width: 70px;
+    height: 70px;
+    border: 0;
+    background-color: #ad56ff;
+    border-radius: 100%;
+    cursor: pointer;
+    background-image: url("/static/images/icons/btn_subir.svg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 50%;
+    margin-left: 5px;
+}
+
+.btn_subir:hover {
+    background-color: #b668ff;
+}
+
+.div_fondo {
+    display: none;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+    justify-content: center;
+    align-items: center;
+}
+
+.div_subir {
+    display: grid;
+    background-color: rgb(46, 46, 46);
+    padding: 25px;
+    padding-top: 0;
+    border-radius: 20px;
+}
+
+.titulo_form {
+    text-align: center;
+}
+
+.titulo_form_input {
+    font-size: 25px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    outline: none;
+    border: 0;
+    color: #eab926;
+    text-align: center;
+    background-color: transparent;
+}
+
+.div_image_form {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.btn_image_hover {
+    position: absolute;
+    height: 200px;
+    width: 200px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.btn_image_hover:hover {
+    background-color: rgba(255, 255, 255, 0.15)
+}
+
+.btn_image {
+    height: 200px;
+    width: 200px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.input_form {
+    padding: 10px;
+    outline: none;
+    border-radius: 25px;
+    border: 0;
+    background-color: rgb(78, 78, 78);
+    color: #eab926;
+    width: -webkit-fill-available;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.input_form::placeholder {
+    color: #eab9267e;
+}
+
+.btn_archivo {
+    background-color: #eab926;
+    border: 0;
+    color: white;
+    border-radius: 25px;
+    padding: 10px;
+    margin-top: 5px;
+    cursor: pointer;
+}
+
+.btn_archivo:hover {
+    background-color: #ffce3b;
+}
+
+.div_botones_form {
+    display: flex;
+    margin-top: 10px;
+}
+
+.btn_aceptar {
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: rgb(68, 195, 106);
+    padding: 10px;
+    border-radius: 25px;
+    border: 0;
+    width: 50%;
+    margin-right: 5px;
+    cursor: pointer;
+}
+
+.btn_aceptar:hover {
+    background-color: rgb(120, 213, 148);
+}
+
+.btn_cancelar {
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: rgb(230, 57, 86);
+    padding: 10px;
+    border-radius: 25px;
+    border: 0;
+    width: 50%;
+    margin-left: 5px;
+    cursor: pointer;
+}
+
+.btn_cancelar:hover {
+    background-color: rgb(233, 91, 115);
+}
+
+.div_reproductor {
+    position: fixed;
+    display: flex;
+    left: 50%;
+    bottom: 0;
+    width: 40%;
+    transform: translateX(-50%) translateY(200%);
+}
+
+.reproductor {
+    position: relative;
+    display: grid;
+    flex-grow: 1;
+    height: fit-content;
+    background-color: rgb(70, 70, 70);
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    padding: 20px;
+    align-items: center;
+    align-self: flex-end;
+}
+
+@keyframes reproductor {
+    0%{
+        transform: translateX(-50%) translateY(200%);
+    }
+    100%{
+        transform: translateX(-50%) translateY(0);
+    }
+}
+
+.txt_cancion_seleccionada {
+    color: #ffd863;
+    font-family: Arial, Helvetica, sans-serif;
+    width: 100%;
+    margin: 0;
+    margin-bottom: 20px;
+    text-align: center;
+    z-index: 1;
+}
+
+.div_play_duracion {
+    position: relative;
+    display: flex;
+    height: fit-content;
+    align-items: center;
+    align-self: flex-end;
+}
+
+.btn_play {
+    background-color: transparent;
+    background-image: url("/static/images/icons/btn_play.svg");
+    border: 0;
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+    outline: none;
+}
+
+.btn_pause {
+    background-color: transparent;
+    background-image: url("/static/images/icons/btn_pause.svg");
+    border: 0;
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+    outline: none;
+}
+
+.div_duracion {
+    position: relative;
+    display: flex;
+    background-color: rgb(90, 90, 90);
+    flex-grow: 1;
+    border-radius: 25px;
+    margin-left: 20px;
+    margin-right: 5px;
+    align-items: center;
+    height: fit-content;
+}
+
+.btn_duracion {
+    position: relative;
+    background-color: #eab926;
+    border: 0;
+    padding: 0;
+    border-radius: 100%;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    transform: translateX(-50%);
+    outline: none;
+}
+
+.espacio_consumido {
+    position: absolute;
+    background-color: #eab9267d;
+    border-radius: 0;
+    border-bottom-left-radius: 25px;
+    border-top-left-radius: 25px;
+    height: 20px;
+}
+
+.btn_duracion:hover {
+    background-color: #ffd453;
+}
+
+.div_volumen {
+    background-color: rgb(70, 70, 70);
+    padding: 10px;
+    padding-top: 15px;
+    width: fit-content;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    margin-left: 10px;
+}
+
+.volumen {
+    position: relative;
+    display: grid;
+    background-color: rgb(90, 90, 90);
+    border-radius: 25px;
+    width: 10px;
+    height: -webkit-fill-available;
+    justify-content: center;
+}
+
+.espacio_volumen {
+    position: absolute;
+    background-color: #eab9267d;
+    border-radius: 0;
+    border-bottom-left-radius: 25px;
+    border-bottom-right-radius: 25px;
+    width: 10px;
+    bottom: 0;
+    height: -webkit-fill-available;
+}
+
+.btn_volumen {
+    position: relative;
+    background-color: #eab926;
+    border: 0;
+    padding: 0;
+    border-radius: 100%;
+    width: 15px;
+    height: 15px;
+    cursor: pointer;
+    outline: none;
+    transform: translateY(-50%);
+}
+
+.btn_volumen:hover {
+    background-color: #ffd453;
+}
+
+.btn_logout {
+    background-image: url("/static/images/icons/btn_logout.svg");
+    height: 30px;
+    width: 30px;
+    margin-left: 20px;
+}
+
+.div_cargando {
+    position: fixed;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 2;
+    justify-content: center;
+}
+
+.cargando {
+    width: 100px;
+    height: 100px;
+    align-self: center;
+    animation-name: cargando;
+    animation-duration: 2000ms;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+@keyframes cargando {
+    0%{
+        transform: rotate(0deg);
+    }
+    100%{
+        transform: rotate(360deg);
+    }
+}
+
+.txt_descripcion {
+    resize: none;
+    height: 75px;
+    padding: 10px;
+    outline: none;
+    border-radius: 25px;
+    border: 0;
+    background-color: rgb(78, 78, 78);
+    color: #eab926;
+    width: -webkit-fill-available;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.txt_descripcion::placeholder {
+    color: #eab9267e;
+}
+
+.div_fondo_contenido {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+    justify-content: center;
+    align-items: center;
+}
+
+.div_contenidos {
+    position: relative;
+    display: flex;
+}
+
+.div_contenido {
+    position: relative;
+    display: grid;
+    background-color: rgb(46, 46, 46);
+    padding: 25px;
+    padding-top: 0;
+    border-radius: 20px;
+    width: 600px;
+    margin-right: 10px;
+}
+
+.btn_cerrar {
+    background-color: transparent;
+    background-image: url("/static/images/icons/btn_cerrar.svg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    border: 0;
+    position: absolute;
+    height: 20px;
+    width: 20px;
+    right: 0;
+    margin: 20px;
+    cursor: pointer;
+}
+
+.btn_quitar_cancion {
+    background-color: transparent;
+    background-image: url("/static/images/icons/btn_cerrar.svg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    border: 0;
+    margin-right: 20px;
+    position: absolute;
+    height: 20px;
+    width: 20px;
+    right: 0;
+    cursor: pointer;
+}
+
+.lista_canciones {
+    display: block;
+    height: 300px;
+    overflow-y: auto;
+    background-color: #424242;
+    border-radius: 20px;
+    padding: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.div_cancion_album {
+    position: relative;
+    display: flex;
+    border-radius: 20px;
+    padding: 10px;
+    height: fit-content;
+    background-color: #525252;
+    align-items: center;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.img_cancion_album {
+    border-radius: 10px;
+    height: 50px;
+    width: 50px;
+}
+
+.div_lista_btn {
+    display: grid;
+    position: relative;
+    margin-left: 10px;
+}
+
+.div_lista_canciones {
+    position: relative;
+    background-color: rgb(46, 46, 46);
+    padding: 25px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border-radius: 20px;
+    width: 350px;
+    height: 350px;
+    overflow-y: auto;
+}
+
+.div_cancion_lista {
+    display: flex;
+    align-items: center;
+    background-color: #424242;
+    padding: 10px;
+    border-radius: 15px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.nombre_cancion_album {
+    color: #eab926;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
+    margin: 0;
+}
+
+.valor_cancion_album {
+    color: #eab926;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
+    margin: 0;
+    width: fit-content;
+}
+
+.btn_seleccionar_cancion {
+    background-color: rgba(89, 75, 34, 0.659);
+    border: 1px solid #eab926;
+    border-radius: 5px;
+    width: 20px;
+    height: 20px;
+    margin-left: auto;
+    cursor: pointer;
+}
+
+.btn_cancion_seleccionada {
+    background-color: #eab926;
+    border: 1px solid #eab926;
+    background-image: url("/static/images/icons/btn_cancion_seleccionada.svg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    border-radius: 5px;
+    width: 20px;
+    height: 20px;
+    margin-left: auto;
+    cursor: pointer;
+    padding: 5px;
+}
+
+.div_btn_contenido {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.btn_contenido {
+    height: 15px;
+    width: 30px;
+    background-color: transparent;
+    background-image: url("/static/images/icons/btn_contenido.svg");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    border: 0;
+    cursor: pointer;
+}
+
+.btn_actualizar {
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #eab926;
+    border-radius: 25px;
+    padding: 10px;
+    margin-top: 20px;
+    border: 0;
+    cursor: pointer;
+}
+
+.btn_actualizar:hover {
+    background-color: #ffd148;
+}
+
+.div_agregar_favorito {
+    display: grid;
+    position: relative;
+    width: 100%;
+    justify-items: center;
+}
+
+.btn_agregar_favorito {
+    color: white;
+    border: 0;
+    background-color: #b967df;
+    padding: 10px;
+    border-radius: 25px;
+}

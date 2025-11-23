@@ -1,0 +1,153 @@
+body, html {
+    background-color: rgb(16, 16, 16);
+    background-image: url("/static/images/decorative/background_login.svg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin: 0;
+    display: grid;
+    height: 100%;
+    width: 100%;
+}
+
+.div_fondo_form {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: grid;
+    overflow: hidden;
+    justify-content: center;
+    align-items: center;
+}
+
+.div_login {
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    position: absolute;
+    display: grid;
+    background-color: rgb(36, 36, 36);
+    border-radius: 20px;
+    padding: 30px;
+    max-height: 65vh;
+    max-width: 70vw;
+    width: 400px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-width: none;
+}
+
+.div_register {
+    top: 200%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    position: absolute;
+    display: grid;
+    background-color: rgb(36, 36, 36);
+    border-radius: 20px;
+    padding: 30px;
+    max-height: 65vh;
+    max-width: 70vw;
+    width: 400px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-width: none;
+}
+
+.titulo_login {
+    color: #ffdd76;
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.img_logo {
+    top: 0;
+    margin: 2.5vw;
+    position: fixed;
+    width: 3.5vw;
+    height: 3.5vw;
+    z-index: 1;
+}
+
+.input_form {
+    background-color: rgb(75, 75, 75);
+    padding: 10px;
+    border-radius: 25px;
+    border: 0;
+    color: white;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    color: white;
+}
+
+.input_form:focus {
+    outline: 2px solid #ffeebd;
+    color: #ffeebd;
+}
+
+.div_botones {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.btn_ingresar {
+    color: white;
+    background-color: #eab926;
+    border: 0;
+    border-radius: 25px;
+    padding: 15px;
+    width: 100%;
+    font-size: 15px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.btn_ingresar:hover {
+    background-color: #ffd041;
+}
+
+.btn_registrarse {
+    color: #eab926;
+    background-color: white;
+    border: 0;
+    border-radius: 25px;
+    padding: 15px;
+    width: 100%;
+    font-size: 15px;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.btn_registrarse:hover {
+    color: #ffd041;
+}
+
+.div_mensaje {
+    position: absolute;
+    display: grid;
+    background-color: rgb(185, 185, 185);
+    padding: 15px;
+    border-radius: 25px;
+    color: rgb(75, 75, 75);
+    left: 50%;
+    font-family: Arial, Helvetica, sans-serif;
+    transform: translateX(-50%) translateY(50%);
+    animation-name: mensaje;
+    animation-duration: 3000ms;
+    animation-fill-mode: forwards;
+}
+
+@keyframes mensaje {
+    0%{
+        opacity: 100%;
+    }
+    50%{
+        opacity: 100%;
+    }
+    100%{
+        opacity: 0%;
+        display: none;
+    }
+}
