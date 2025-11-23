@@ -1,7 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-    <circle r="30" cx="65" cy="35" fill="transparent" stroke="#eab926" stroke-width="10" />
-
-    <path d="M 5 95 L 5 45" stroke="#eab926" stroke-width="10"
-    stroke-linecap="round" stroke-linejoin="round"
-    transform="rotate(45 5 95)"/>
-</svg>
