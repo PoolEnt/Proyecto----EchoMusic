@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EchoMusic: Inicio</title>
+    <link rel="stylesheet" href="/static/styles/index.css">
+    <link rel="icon" href="/static/images/icons/favicon.svg">
+</head>
+<body>
+    <div class="div_fondo_home">
+        <header>
+            <a class="img_logo" href="{% url 'index' %}"></a>
+            <form class="form_buscar" action="{% url 'buscar' %}" method="get">
+                {% csrf_token %}
+                <div class="div_buscar">
+                    <input class="input_buscar" type="text" placeholder="Buscar" name="buscar">
+                    <button class="btn_buscar" type="submit"></button>
+                    <input type="hidden" value="{{ filtro }}" id="filtro" name="filtro">
+                </div>
+            </form>
+            <a class="btn_perfil" style="background-image: url('{{ usuario.foto_perfil.url }}');" href="{% url 'perfil' %}"></a>
+            <a class="btn_logout" href="{% url 'logout' %}"></a>
+        </header>
+
+        <h1>Tu biblioteca</h1>
+        <div class="div_filtros">
+            <button class="btn_filtro_act" type="button" id="btn_filtro_canciones">Canciones</button>
+            <button class="btn_filtro_des" type="button" id="btn_filtro_albumes">Álbumes</button>
+        </div>
+
+        <div class="div_canciones" id="div_canciones">
+            {% if canciones %}
+                {% for cancion in canciones %}
+                    <div class="div_cancion">
+                        <img class="imagen_cancion" src="{{ cancion.imagen.url }}" alt="imagen_cancion">
+                        <p class="nombre_cancion"><strong>{{ cancion.nombre }}</strong></p>
+                        <p class="autor_cancion">{{ cancion.autor }}</p>
+                        {% if not cancion.favorito %}
+                            <form class="div_agregar_favorito" action="{% url 'agregar_favorito' %}" method="post">
+                                {% csrf_token %}
+                                <input type="hidden" name="cancion_id" value="{{ cancion.id }}">
+                                <button class="btn_agregar_favorito" type="submit">Agregar a favoritos</button>
+                            </form>
+                        {% endif %}
+                        <audio class="audio_cancion" src="{{ cancion.archivo.url }}"></audio>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <h3 class="txt_mensaje_home">No hay canciones</h3>
+            {% endif %}
+        </div>
+
+        <div class="div_albumes" id="div_albumes">
+            {% if albumes %}
+                {% for album in albumes %}
+                    <div class="div_album">
+                        <div class="div_btn_contenido">
+                            <button class="btn_contenido"></button>
+                        </div>
+                        <img class="imagen_album" src="{{ album.imagen.url }}" alt="imagen_album">
+                        <p class="nombre_album"><strong>{{ album.nombre }}</strong></p>
+                        <p class="descripcion_album">{{ album.descripcion }}</p>
+                        <div style="display: none;" class="div_canciones_album">
+                            {% for A_C in album.album_cancion_set.all %}
+                                <audio class="audio_cancion_album" src="{{ A_C.cancion.archivo.url }}"></audio>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                    <div class="div_fondo_contenido">
+                        <div class="div_contenidos">
+                            <form style="position: relative; display: flex;" action="{% url 'actualizar' %}" method="post">
+                                <div class="div_contenido">
+                                    <button type="button" class="btn_cerrar"></button>
+                                    <input class="titulo_form_input" maxlength="30" type="text" name="album_nombre" value="{{ album.nombre }}">
+                                    <div class="lista_canciones">
+                                        {% if album.album_cancion_set.all %}
+                                            {% for A_C in album.album_cancion_set.all %}
+                                                <div class="div_cancion_album">
+                                                    <img class="img_cancion_album" src="{{ A_C.cancion.imagen.url }}" alt="imagen_cancion_{{ A_C.cancion.id }}">    
+                                                    <div style="display: grid; margin-left: 10px;">
+                                                        <p class="valor_cancion_album">{{ A_C.cancion.nombre }}</p>
+                                                        <p class="valor_cancion_album">{{ A_C.cancion.autor }}</p>
+                                                    </div>
+                                                    <button type="button" class="btn_quitar_cancion"></button>
+                                                </div>
+                                                <input type="hidden" class="cancion_id" value="{{ A_C.cancion.id }}">
+                                                <input type="hidden" name="cancion_quitar[]">
+                                            {% endfor %}
+                                        {% else %}
+                                            <div style="display: grid; height: 100%;">
+                                                <h3 class="txt_mensaje_home">No hay canciones en este álbum</h3>
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+
+                                <div class="div_lista_btn">
+                                    {% csrf_token %}
+                                    <div class="div_lista_canciones">
+                                        {% for cancion in canciones %}
+                                            {% if not cancion.id in album.ids_canciones %}
+                                                <div class="div_cancion_lista">
+                                                    <p class="nombre_cancion_album"><strong>{{ cancion.nombre }}</strong> de {{ cancion.autor }}</p>
+                                                    <button class="btn_seleccionar_cancion" type="button"></button>
+                                                    <input class="cancion_id" type="hidden" value="{{ cancion.id }}">
+                                                    <input type="hidden" name="cancion_id[]">
+                                                </div>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </div>
+                                    <input type="hidden" value="{{ album.id }}" name="album_id">
+                                    <button class="btn_actualizar" type="submit">Actualizar</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <h3 class="txt_mensaje_home">No hay álbumes</h3>
+            {% endif %}
+        </div>
+
+        <div class="div_botones_home">
+            <button class="btn_crear" type="button" id="btn_crear">Crear</button>
+            <button class="btn_subir" type="button" id="btn_subir"></button>
+        </div>
+
+        <div class="div_reproductor" id="reproductor">
+            <div class="reproductor">
+                <p class="txt_cancion_seleccionada" id="txt_cancion_seleccionada"></p>
+                <audio id="cancion_seleccionada"></audio>
+                <div class="div_play_duracion">
+                    <button class="btn_play" type="button" id="btn_play"></button>
+                    <div class="div_duracion" id="div_duracion">
+                        <div class="espacio_consumido" id="espacio_consumido"></div>
+                        <button class="btn_duracion" draggable="false" id="btn_duracion"></button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="div_volumen">
+                <div class="volumen" id="volumen">
+                    <div class="espacio_volumen" id="espacio_volumen"></div>
+                    <button class="btn_volumen" draggable="false" id="btn_volumen"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="div_fondo" id="div_fondo_crear">
+        <form class="div_subir" action="{% url 'crear_album' %}" enctype="multipart/form-data" method="post">
+            {% csrf_token %}
+            <h1 class="titulo_form">Crear un álbum</h1>
+
+            <div class="div_image_form">
+                <div class="btn_image_hover" id="btn_image_album_hover"></div>
+                <img class="btn_image" src="/media/default/img_album.svg" id="btn_image_album" alt="imagen_álbum">
+            </div>
+            
+            <input id="input_imagen_crear" type="file" style="display: none;" name="imagen_album">
+            <input class="input_form" id="input_nombre_album" type="text" maxlength="30" placeholder="Nombre del álbum (máximo 30 carácteres)" name="nombre">
+            <textarea class="txt_descripcion" id="input_descripcion_album" name="descripcion" maxlength="100" placeholder="Descripción del álbum (máximo 100 carácteres)"></textarea>
+            <div class="div_botones_form">
+                <button type="submit" class="btn_aceptar">Crear</button>
+                <button type="button" class="btn_cancelar" id="btn_cancelar_album">Cancelar</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="div_fondo" id="div_fondo_subir">
+        <form class="div_subir" action="{% url 'subir_cancion' %}" enctype="multipart/form-data" method="post">
+            {% csrf_token %}
+            <h1 class="titulo_form">Subir una canción</h1>
+
+            <div class="div_image_form">
+                <div class="btn_image_hover" id="btn_image_cancion_hover"></div>
+                <img class="btn_image" src="/media/default/img_album.svg" id="btn_image_cancion" alt="imagen_canción">
+            </div>
+
+            <input id="input_imagen_subir" type="file" style="display: none;" name="imagen_cancion">
+            <input class="input_form" id="input_nombre_cancion" type="text" maxlength="30" placeholder="Nombre de la canción (máximo 30 carácteres)" name="nombre">
+            <input class="input_form" id="input_autor_cancion" type="text" maxlength="30" placeholder="Autor de la canción (máximo 30 carácteres)" name="autor">
+            <button class="btn_archivo" type="button" id="btn_archivo">Seleccionar archivo (mp3, wav, m4a, flac y ogg)</button>
+            <input id="input_archivo" style="display: none;" type="file" name="archivo">
+
+            <div class="div_botones_form">
+                <button type="submit" class="btn_aceptar">Subir</button>
+                <button type="button" class="btn_cancelar" id="btn_cancelar_cancion">Cancelar</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="div_cargando" id="div_cargando">
+        <img class="cargando" src="/static/images/icons/logo.svg">
+    </div>
+
+    <script src="/static/scripts/index.js"></script>
+</body>
+</html>
