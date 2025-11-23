@@ -141,7 +141,7 @@ h1 {
 
 .div_cancion {
     width: 200px;
-    height: 300px;
+    height: 325px;
     border-radius: 20px;
     background-color: #eab926;
     padding: 10px;
@@ -796,4 +796,19 @@ h1 {
 
 .btn_actualizar:hover {
     background-color: #ffd148;
+}
+
+.div_agregar_favorito {
+    display: grid;
+    position: relative;
+    width: 100%;
+    justify-items: center;
+}
+
+.btn_agregar_favorito {
+    color: white;
+    border: 0;
+    background-color: #b967df;
+    padding: 10px;
+    border-radius: 25px;
 }

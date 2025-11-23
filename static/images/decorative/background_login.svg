@@ -56,7 +56,7 @@
 
         <linearGradient id="gradiente_fondo_1" x1="0%" y1="0%" x2="0%" y2="100%">
             <stop offset="0%" stop-color="transparent" />
-            <stop offset="100%" stop-color="#000000" />
+            <stop offset="100%" stop-color="#ffbf00" />
         </linearGradient>
 
         <linearGradient id="gradiente_fondo_2" x1="0%" y1="100%" x2="0%" y2="0%">

@@ -36,6 +36,7 @@ class Cancion(models.Model):
     imagen = models.ImageField(validators=[imagen_valida], null=False, blank=False, default='/default/img_album.svg')
     archivo = models.FileField(validators=[audio_valido], null=False, blank=False, unique=True)
     usuario = models.ForeignKey(Usuario, null=False, blank=False, on_delete=models.CASCADE)
+    favorito = models.BooleanField(null=False, blank=False, default=False)
 
 class Album_Cancion(models.Model):
     album = models.ForeignKey(Album, null=False, blank=False, on_delete=models.CASCADE)

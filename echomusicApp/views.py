@@ -42,9 +42,6 @@ def index(request):
         albumes = Album.objects.filter(usuario=usuario).order_by('-id')
         canciones = Cancion.objects.filter(usuario=usuario).order_by('-id')
 
-        for album in albumes:
-            album.ids_canciones = set(album.album_cancion_set.values_list('cancion', flat=True))
-
         data = {
             'usuario':usuario,
             'albumes': albumes,
@@ -137,13 +134,95 @@ def perfil(request):
     if 'usuario_id' in request.session:
         usuario = Usuario.objects.get(id=request.session['usuario_id'])
 
+        total_canciones = Cancion.objects.filter(usuario=usuario).count()
+        total_albumes = Album.objects.filter(usuario=usuario).count()
+        
+        canciones = Cancion.objects.filter(usuario=usuario).order_by('-id')
+        albumes = Album.objects.filter(usuario=usuario).order_by('-id')
+        
+        favoritos = []
+
+        for cancion in canciones:
+            if cancion.favorito:
+                favoritos.append(cancion)
+        
         data = {
-            'usuario':usuario
+            'usuario':usuario,
+            'total_canciones': total_canciones,
+            'total_albumes': total_albumes,
+            'canciones': canciones,
+            'albumes': albumes,
+            'canciones_favoritas': favoritos
         }
 
         return render(request, 'perfil.html', data)
     else:
         return redirect('login')
+
+def actualizar_perfil(request):
+    if 'usuario_id' in request.session:
+        if request.method == 'POST':
+            username = request.POST.get("username")
+            foto_perfil = request.FILES.get("foto_perfil")
+            
+            try:
+                usuario = Usuario.objects.get(id=request.session['usuario_id'])
+                
+                if username:
+                    usuario.username = username
+                
+                if foto_perfil:
+                    if imagen_valida(foto_perfil):
+                        usuario.foto_perfil = foto_perfil
+                
+                usuario.save()
+                return redirect('perfil') 
+            except Exception as e:
+                print(f"ERROR: {e}")
+                return redirect('perfil')
+        else:
+            return redirect('perfil')
+    else:
+        return redirect('login')
+
+def agregar_favorito(request):
+    if 'usuario_id' in request.session:
+        cancion_id = request.POST.get('cancion_id')
+        
+        try:
+            usuario = Usuario.objects.get(id=request.session['usuario_id'])
+            cancion = Cancion.objects.get(id=cancion_id, usuario=usuario)
+            
+            cancion.favorito = True
+            cancion.save()
+
+            return redirect('index')
+
+        except Exception as e:
+            print(f"ERROR: {e}")
+            return redirect('index')
+    else:
+        return redirect('login')
+
+def quitar_favorito(request):
+    if 'usuario_id' in request.session:
+        cancion_id = request.POST.get('cancion_id')
+        
+        try:
+            usuario = Usuario.objects.get(id=request.session['usuario_id'])
+            cancion = Cancion.objects.get(id=cancion_id, usuario=usuario)
+            
+            cancion.favorito = False
+            cancion.save()
+
+            return redirect('perfil')
+
+        except Exception as e:
+            print(f"ERROR: {e}")
+            return redirect('perfil')
+    else:
+        return redirect('login')
+
 
 def subir_cancion(request):
     if 'usuario_id' in request.session:
@@ -285,23 +364,11 @@ def actualizar(request):
     if 'usuario_id' in request.session:
         canciones = request.POST.getlist('cancion_id[]')
         album_id = request.POST.get('album_id')
-        album_nombre = request.POST.get('album_nombre')
-        canciones_quitar = request.POST.getlist('cancion_quitar[]')
 
         try:
             album_id = int(album_id)
             usuario = Usuario.objects.get(id=request.session['usuario_id'])
             album = Album.objects.get(id=album_id, usuario_id=usuario.id)
-
-            for id_quitar in canciones_quitar:
-                if id_quitar != '':
-                    id_cancion_quitar = int(id_quitar)
-                    cancion_quit = Cancion.objects.get(id=id_cancion_quitar)
-                    relacion = Album_Cancion.objects.filter(album=album, cancion=cancion_quit)
-                    relacion.delete()
-
-            album.nombre = album_nombre
-            album.save()
 
             if canciones:
                 for cancion_id in canciones:

@@ -1,0 +1,367 @@
+body, html {
+    background-color: rgb(16, 16, 16);
+    margin: 0;
+    display: grid;
+    height: 100%;
+    width: 100%;
+    position: relative;
+}
+
+::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #4a4a4a;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.div_fondo_perfil {
+    padding: 20px;
+    position: relative;
+}
+
+header {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.img_logo {
+    width: 40px;
+    height: 40px;
+    margin-right: 20px;
+    background-image: url("/static/images/icons/logo.svg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.titulo_header {
+    font-family: Arial, Helvetica, sans-serif;
+    color: #eab926;
+    flex-grow: 1;
+    margin: 0;
+}
+
+.btn_logout {
+    background-image: url("/static/images/icons/btn_logout.svg");
+    height: 30px;
+    width: 30px;
+}
+
+
+.div_contenido_perfil {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.div_info_usuario {
+    display: flex;
+    background-color: rgb(35, 35, 35);
+    border-radius: 20px;
+    padding: 30px;
+    margin-bottom: 20px;
+    align-items: center;
+}
+
+.div_foto_perfil {
+    position: relative;
+    margin-right: 30px;
+}
+
+.foto_perfil {
+    width: 150px;
+    height: 150px;
+    border-radius: 100%;
+    object-fit: cover;
+}
+
+.overlay_foto {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 150px;
+    height: 150px;
+    border-radius: 100%;
+    background-color: rgba(0, 0, 0, 0);
+    transition: background-color 0.3s;
+}
+
+.div_datos_usuario {
+    flex-grow: 1;
+}
+
+.nombre_usuario {
+    font-family: Arial, Helvetica, sans-serif;
+    color: #eab926;
+    margin: 0;
+    margin-bottom: 10px;
+    font-size: 32px;
+}
+
+.dato_usuario {
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+    margin: 5px 0;
+    font-size: 16px;
+}
+
+.div_estadisticas {
+    display: flex;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.estadistica {
+    text-align: center;
+    margin-right: 30px;
+}
+
+.numero_estadistica {
+    font-family: Arial, Helvetica, sans-serif;
+    color: #eab926;
+    font-size: 28px;
+    font-weight: bold;
+    margin: 0;
+}
+
+.texto_estadistica {
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+    margin: 0;
+    font-size: 14px;
+}
+
+.btn_editar {
+    background-color: #eab926;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    border: 0;
+    border-radius: 25px;
+    padding: 12px 30px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.btn_editar:hover {
+    background-color: #ffd148;
+}
+
+
+.div_pestanas {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.btn_pestana_act {
+    color: #eab926;
+    background-color: white;
+    border: 2px solid #eab926;
+    border-radius: 25px;
+    padding: 12px 25px;
+    font-size: 16px;
+    font-weight: bold;
+    margin-right: 10px;
+    cursor: pointer;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.btn_pestana_des {
+    color: white;
+    background-color: #eab926;
+    border: 2px solid #eab926;
+    border-radius: 25px;
+    padding: 12px 25px;
+    font-size: 16px;
+    font-weight: bold;
+    margin-right: 10px;
+    cursor: pointer;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.btn_pestana_des:hover {
+    background-color: #ffd148;
+}
+
+
+.div_seccion {
+    background-color: rgb(35, 35, 35);
+    border-radius: 20px;
+    padding: 20px;
+    min-height: 300px;
+    position: relative;
+    display: grid;
+}
+
+.grid_canciones {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.card_cancion {
+    width: 200px;
+    background-color: #eab926;
+    border-radius: 20px;
+    padding: 15px;
+}
+
+.imagen_cancion {
+    width: 200px;
+    height: 200px;
+    border-radius: 20px;
+    object-fit: cover;
+}
+
+.nombre_cancion {
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 10px 0 5px 0;
+    overflow-x: hidden;
+}
+
+.autor_cancion {
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    overflow-x: hidden;
+}
+
+.txt_mensaje {
+    color: #eab926;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 24px;
+    text-align: center;
+}
+
+.btn_quitar_favorito {
+    background-color: rgb(230, 57, 86);
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    border: 0;
+    border-radius: 15px;
+    padding: 8px 15px;
+    cursor: pointer;
+    font-size: 13px;
+    width: 100%;
+}
+
+.btn_quitar_favorito:hover {
+    background-color: rgb(233, 91, 115);
+}
+
+.div_fondo {
+    display: none;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    left: 0;
+}
+
+.div_editar {
+    display: grid;
+    background-color: rgb(46, 46, 46);
+    padding: 25px;
+    padding-top: 0;
+    border-radius: 20px;
+}
+
+.titulo_form {
+    text-align: center;
+    color: #eab926;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.div_image_form {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.btn_image_hover {
+    position: absolute;
+    height: 150px;
+    width: 150px;
+    border-radius: 100%;
+    cursor: pointer;
+}
+
+.btn_image_hover:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+}
+
+.btn_image {
+    height: 150px;
+    width: 150px;
+    border-radius: 100%;
+    cursor: pointer;
+    object-fit: cover;
+}
+
+.input_form {
+    padding: 10px;
+    outline: none;
+    border-radius: 25px;
+    border: 0;
+    background-color: rgb(78, 78, 78);
+    color: #eab926;
+    width: -webkit-fill-available;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.input_form::placeholder {
+    color: #eab9267e;
+}
+
+.div_botones_form {
+    display: flex;
+    margin-top: 10px;
+}
+
+.btn_aceptar {
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: rgb(68, 195, 106);
+    padding: 10px;
+    border-radius: 25px;
+    border: 0;
+    width: 50%;
+    margin-right: 5px;
+    cursor: pointer;
+}
+
+.btn_aceptar:hover {
+    background-color: rgb(120, 213, 148);
+}
+
+.btn_cancelar {
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: rgb(230, 57, 86);
+    padding: 10px;
+    border-radius: 25px;
+    border: 0;
+    width: 50%;
+    margin-left: 5px;
+    cursor: pointer;
+}
+
+.btn_cancelar:hover {
+    background-color: rgb(233, 91, 115);
+}
