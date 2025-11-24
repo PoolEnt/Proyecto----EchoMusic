@@ -26,7 +26,6 @@ urlpatterns = [
     path('login/', views.login, name='login'),
     path('registrarse/', views.registrarse, name='registrarse'),
     path('ingresar/', views.ingresar, name='ingresar'),
-    path('perfil/', views.perfil, name='perfil'),
     path('actualizar_perfil/', views.actualizar_perfil, name='actualizar_perfil'),
     path('agregar_favorito/', views.agregar_favorito, name='agregar_favorito'),
     path('eliminar_favorito/', views.eliminar_favorito, name='eliminar_favorito'),

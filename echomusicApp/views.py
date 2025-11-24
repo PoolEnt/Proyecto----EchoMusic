@@ -41,6 +41,13 @@ def index(request):
         usuario = Usuario.objects.get(id=request.session['usuario_id'])
         albumes = Album.objects.filter(usuario=usuario).order_by('-id')
         canciones = Cancion.objects.filter(usuario=usuario).order_by('-id')
+        total_canciones = Cancion.objects.filter(usuario=usuario).count()
+        total_albumes = Album.objects.filter(usuario=usuario).count()
+        favoritos = []
+
+        for cancion in canciones:
+            if cancion.favorito:
+                favoritos.append(cancion)
 
         for album in albumes:
             album.ids_canciones = set(album.album_cancion_set.values_list('cancion', flat=True))
@@ -49,7 +56,10 @@ def index(request):
             'usuario':usuario,
             'albumes': albumes,
             'canciones': canciones,
-            'filtro':'canciones'
+            'filtro':'canciones',
+            'total_canciones': total_canciones,
+            'total_albumes': total_albumes,
+            'canciones_favoritas': favoritos
         }
 
         return render(request, 'index.html', data)
@@ -130,35 +140,6 @@ def ingresar(request):
             }
 
             return render(request, 'login.html', data)
-    else:
-        return redirect('login')
-    
-def perfil(request):
-    if 'usuario_id' in request.session:
-        usuario = Usuario.objects.get(id=request.session['usuario_id'])
-
-        total_canciones = Cancion.objects.filter(usuario=usuario).count()
-        total_albumes = Album.objects.filter(usuario=usuario).count()
-        
-        canciones = Cancion.objects.filter(usuario=usuario).order_by('-id')
-        albumes = Album.objects.filter(usuario=usuario).order_by('-id')
-        
-        favoritos = []
-
-        for cancion in canciones:
-            if cancion.favorito:
-                favoritos.append(cancion)
-        
-        data = {
-            'usuario':usuario,
-            'total_canciones': total_canciones,
-            'total_albumes': total_albumes,
-            'canciones': canciones,
-            'albumes': albumes,
-            'canciones_favoritas': favoritos
-        }
-
-        return render(request, 'perfil.html', data)
     else:
         return redirect('login')
 

@@ -1,16 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EchoMusic: Perfil</title>
-    <link rel="stylesheet" href="/static/styles/perfil.css">
-</head>
-<body>
+<div id="div_perfil">
     <div class="div_fondo_perfil">
         <header>
-            <a class="img_logo" href="{% url 'index' %}"></a>
-            <h2 class="titulo_header">Mi Perfil</h2>
+            <button class="img_logo" id="img_logo"></button>
+            <form class="form_buscar" action="{% url 'buscar' %}" method="get">
+                {% csrf_token %}
+                <div class="div_buscar">
+                    <input class="input_buscar" type="text" placeholder="Buscar" name="buscar">
+                    <button class="btn_buscar" type="submit"></button>
+                    <input type="hidden" value="{{ filtro }}" id="filtro" name="filtro">
+                </div>
+            </form>
+            <button id="btn_perfil" class="btn_perfil" style="background-image: url('{{ usuario.foto_perfil.url }}');"></button>
             <a class="btn_logout" href="{% url 'logout' %}"></a>
         </header>
 
@@ -22,9 +22,7 @@
                 </div>
                 
                 <div class="div_datos_usuario">
-                    <h1 class="nombre_usuario">{{ usuario.nombre }} {{ usuario.apellido }}</h1>
-                    <p class="dato_usuario"><strong>Usuario:</strong> @{{ usuario.username }}</p>
-                    <p class="dato_usuario"><strong>Correo:</strong> {{ usuario.correo }}</p>
+                    <h1 class="nombre_usuario">{{ usuario.username }}</h1>
                     
                     <div class="div_estadisticas">
                         <div class="estadistica">
@@ -64,7 +62,7 @@
                         {% endfor %}
                     </div>
                 {% else %}
-                    <div style="height: 100%; position: relative; display: grid; align-items: center;">
+                    <div style="height: 100%; position: relative; display: grid; align-items: center; width: 100%;">
                         <h3 class="txt_mensaje">No tienes canciones favoritas aún</h3>
                     </div>
                 {% endif %}
@@ -92,5 +90,4 @@
     </div>
 
     <script src="/static/scripts/perfil.js"></script>
-</body>
-</html>
+</div>

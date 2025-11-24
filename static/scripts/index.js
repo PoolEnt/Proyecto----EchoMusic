@@ -404,3 +404,21 @@ function reproducir_siguiente(album_seleccionado) {
         }
     }
 }
+
+const btn_perfil = document.getElementById("btn_perfil")
+const div_index = document.getElementById("div_index")
+const div_perfil = document.getElementById("div_perfil")
+
+div_perfil.style.display = "none"
+
+btn_perfil.addEventListener("click", function(){
+    div_index.style.visibility = "hidden"
+    div_perfil.style.display = "block"
+})
+
+const img_logo = document.getElementById("img_logo")
+
+img_logo.addEventListener("click", function(){
+    div_index.style.visibility = "visible"
+    div_perfil.style.display = "none"
+})
