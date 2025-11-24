@@ -134,7 +134,8 @@ cancion_seleccionada.addEventListener("timeupdate", function(){
 
 imagen_canciones.forEach(imagen => {
     const padre = imagen.parentElement
-    const nombre_cancion = imagen.nextElementSibling
+    const div_nombre_autor = imagen.nextElementSibling
+    const nombre_cancion = div_nombre_autor.firstElementChild
     const cancion = padre.lastElementChild
 
     imagen.addEventListener("click", function(){
@@ -349,8 +350,8 @@ imagen_albumes.forEach(imagen => {
     const padre = imagen.parentElement
     const div_canciones_album = padre.lastElementChild
     const canciones = div_canciones_album.querySelectorAll('audio')
-
-    const nombre_cancion = imagen.nextElementSibling
+    const div_nombre_descripcion = imagen.nextElementSibling
+    const nombre_cancion = div_nombre_descripcion.firstElementChild
     imagen.addEventListener("click", function(){
         album_seleccionado = imagen
         if(canciones.length >= 1){
