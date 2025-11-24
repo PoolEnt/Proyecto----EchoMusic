@@ -313,7 +313,7 @@ header {
     margin-bottom: 20px;
 }
 
-.btn_image_hover {
+.btn_image_perfil_hover {
     position: absolute;
     height: 150px;
     width: 150px;
@@ -321,11 +321,11 @@ header {
     cursor: pointer;
 }
 
-.btn_image_hover:hover {
+.btn_image_perfil_hover:hover {
     background-color: rgba(255, 255, 255, 0.15);
 }
 
-.btn_image {
+.btn_image_perfil {
     height: 150px;
     width: 150px;
     border-radius: 100%;

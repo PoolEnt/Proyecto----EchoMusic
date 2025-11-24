@@ -160,12 +160,12 @@ def actualizar_perfil(request):
                         usuario.foto_perfil = foto_perfil
                 
                 usuario.save()
-                return redirect('perfil') 
+                return redirect('index') 
             except Exception as e:
                 print(f"ERROR: {e}")
-                return redirect('perfil')
+                return redirect('index')
         else:
-            return redirect('perfil')
+            return redirect('index')
     else:
         return redirect('login')
 
@@ -199,11 +199,11 @@ def eliminar_favorito(request):
             cancion.favorito = False
             cancion.save()
 
-            return redirect('perfil')
+            return redirect('index')
 
         except Exception as e:
             print(f"ERROR: {e}")
-            return redirect('perfil')
+            return redirect('index')
     else:
         return redirect('login')
 
