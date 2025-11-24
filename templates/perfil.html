@@ -51,9 +51,15 @@
                         {% for cancion in canciones_favoritas %}
                             <div class="card_cancion">
                                 <img class="imagen_cancion" src="{{ cancion.imagen.url }}" alt="imagen_cancion">
-                                <p class="nombre_cancion"><strong>{{ cancion.nombre }}</strong></p>
-                                <p class="autor_cancion">{{ cancion.autor }}</p>
-                                <audio class="audio_cancion" src="{{ cancion.archivo.url }}"></audio>
+                                <div class="div_nombre_autor">
+                                    <p class="nombre_cancion"><strong>{{ cancion.nombre }}</strong></p>
+                                    <p class="autor_cancion">{{ cancion.autor }}</p>
+                                </div>
+                                <form class="div_eliminar_favorito" action="{% url 'eliminar_favorito' %}" method="post">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="cancion_id" value="{{ cancion.id }}">
+                                    <button class="btn_eliminar_favorito" type="submit">Eliminar de favoritos</button>
+                                </form>
                             </div>
                         {% endfor %}
                     </div>

@@ -193,12 +193,14 @@ header {
 
 
 .div_seccion {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 20px;
     background-color: rgb(35, 35, 35);
     border-radius: 20px;
-    padding: 20px;
-    min-height: 300px;
-    position: relative;
-    display: grid;
+    padding: 10px;
+    overflow-y: auto;
+    height: 45vh;
 }
 
 .grid_canciones {
@@ -209,9 +211,12 @@ header {
 
 .card_cancion {
     width: 200px;
-    background-color: #eab926;
+    height: 330px;
     border-radius: 20px;
-    padding: 15px;
+    background-color: #eab926;
+    padding: 10px;
+    margin: 10px;
+    position: relative;
 }
 
 .imagen_cancion {
@@ -221,18 +226,25 @@ header {
     object-fit: cover;
 }
 
+.div_nombre_autor {
+    position: relative;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
 .nombre_cancion {
+    margin: 0;
+    margin-bottom: 10px;
     color: white;
     font-family: Arial, Helvetica, sans-serif;
-    margin: 10px 0 5px 0;
-    overflow-x: hidden;
+    overflow-wrap: anywhere;
 }
 
 .autor_cancion {
+    margin: 0;
     color: white;
     font-family: Arial, Helvetica, sans-serif;
-    margin: 0;
-    overflow-x: hidden;
+    overflow-wrap: anywhere;
 }
 
 .txt_mensaje {
@@ -242,19 +254,28 @@ header {
     text-align: center;
 }
 
-.btn_quitar_favorito {
-    background-color: rgb(230, 57, 86);
-    color: white;
-    font-family: Arial, Helvetica, sans-serif;
-    border: 0;
-    border-radius: 15px;
-    padding: 8px 15px;
-    cursor: pointer;
-    font-size: 13px;
+.div_eliminar_favorito {
+    position: absolute;
+    display: flex;
     width: 100%;
+    bottom: 0;
+    left: 50%;
+    margin-bottom: 5px;
+    transform: translateX(-50%);
+    justify-content: center;
 }
 
-.btn_quitar_favorito:hover {
+.btn_eliminar_favorito {
+    color: white;
+    border: 0;
+    background-color: rgb(230, 57, 86);
+    padding: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+    border-radius: 25px;
+    cursor: pointer;
+}
+
+.btn_eliminar_favorito:hover {
     background-color: rgb(233, 91, 115);
 }
 

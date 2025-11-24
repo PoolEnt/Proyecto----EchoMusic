@@ -204,7 +204,7 @@ def agregar_favorito(request):
     else:
         return redirect('login')
 
-def quitar_favorito(request):
+def eliminar_favorito(request):
     if 'usuario_id' in request.session:
         cancion_id = request.POST.get('cancion_id')
         

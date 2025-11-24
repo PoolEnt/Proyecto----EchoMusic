@@ -141,31 +141,41 @@ h1 {
 
 .div_cancion {
     width: 200px;
-    height: 325px;
+    height: 330px;
     border-radius: 20px;
     background-color: #eab926;
     padding: 10px;
     margin: 10px;
+    position: relative;
 }
 
 .imagen_cancion {
+    justify-self: center;
     width: 200px;
     height: 200px;
     border-radius: 20px;
     cursor: pointer;
 }
 
+.div_nombre_autor {
+    position: relative;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
 .nombre_cancion {
+    margin: 0;
+    margin-bottom: 10px;
     color: white;
     font-family: Arial, Helvetica, sans-serif;
-    overflow-x: hidden;
-    flex-wrap: nowrap;
+    overflow-wrap: anywhere;
 }
 
 .autor_cancion {
+    margin: 0;
     color: white;
     font-family: Arial, Helvetica, sans-serif;
-    overflow-x: hidden;
+    overflow-wrap: anywhere;
 }
 
 .div_albumes {
@@ -799,16 +809,26 @@ h1 {
 }
 
 .div_agregar_favorito {
-    display: grid;
-    position: relative;
+    position: absolute;
+    display: flex;
     width: 100%;
-    justify-items: center;
+    bottom: 0;
+    left: 50%;
+    margin-bottom: 5px;
+    transform: translateX(-50%);
+    justify-content: center;
 }
 
 .btn_agregar_favorito {
     color: white;
     border: 0;
     background-color: #b967df;
+    font-family: Arial, Helvetica, sans-serif;
     padding: 10px;
     border-radius: 25px;
+    cursor: pointer;
+}
+
+.btn_agregar_favorito:hover {
+    background-color: #c582e4;
 }

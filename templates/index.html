@@ -34,9 +34,11 @@
                 {% for cancion in canciones %}
                     <div class="div_cancion">
                         <img class="imagen_cancion" src="{{ cancion.imagen.url }}" alt="imagen_cancion">
-                        <p class="nombre_cancion"><strong>{{ cancion.nombre }}</strong></p>
-                        <p class="autor_cancion">{{ cancion.autor }}</p>
-                        {% if cancion.favorito %}
+                        <div class="div_nombre_autor">
+                            <p class="nombre_cancion"><strong>{{ cancion.nombre }}</strong></p>
+                            <p class="autor_cancion">{{ cancion.autor }}</p>
+                        </div>
+                        {% if not cancion.favorito %}
                             <form class="div_agregar_favorito" action="{% url 'agregar_favorito' %}" method="post">
                                 {% csrf_token %}
                                 <input type="hidden" name="cancion_id" value="{{ cancion.id }}">

@@ -68,7 +68,7 @@ btn_archivo.addEventListener("click", function(){
 
 btn_cancelar_cancion.addEventListener("click", function(){
     input_imagen_subir.value = ""
-    btn_image_cancion.src = "/media/default/album.svg"
+    btn_image_cancion.src = "/media/default/img_album.svg"
     input_nombre_cancion.value = ""
     input_archivo.value = ""
     input_autor_cancion.value = ""
