@@ -61,8 +61,10 @@
                             <button class="btn_contenido"></button>
                         </div>
                         <img class="imagen_album" src="{{ album.imagen.url }}" alt="imagen_album">
-                        <p class="nombre_album"><strong>{{ album.nombre }}</strong></p>
-                        <p class="descripcion_album">{{ album.descripcion }}</p>
+                        <div class="div_nombre_descripcion">
+                            <p class="nombre_album"><strong>{{ album.nombre }}</strong></p>
+                            <p class="descripcion_album">{{ album.descripcion }}</p>
+                        </div>
                         <div style="display: none;" class="div_canciones_album">
                             {% for A_C in album.album_cancion_set.all %}
                                 <audio class="audio_cancion_album" src="{{ A_C.cancion.archivo.url }}"></audio>

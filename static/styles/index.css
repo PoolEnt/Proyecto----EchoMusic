@@ -191,32 +191,44 @@ h1 {
 
 .div_album {
     width: 200px;
-    height: 325px;
+    height: 340px;
     border-radius: 20px;
     background-color: #eab926;
     padding: 10px;
+    padding-top: 5px;
     margin: 10px;
+    position: relative;
 }
 
 .imagen_album {
+    justify-self: center;
     width: 200px;
     height: 200px;
     border-radius: 20px;
     cursor: pointer;
 }
 
+.div_nombre_descripcion {
+    position: relative;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
 .nombre_album {
+    margin: 0;
+    margin-bottom: 10px;
     color: white;
     font-family: Arial, Helvetica, sans-serif;
-    overflow-x: hidden;
+    overflow-wrap: anywhere;
 }
 
 .descripcion_album {
+    margin: 0;
     color: white;
-    height: 65px;
     font-family: Arial, Helvetica, sans-serif;
-    overflow-wrap: break-word;
-    overflow-y: auto;
+    overflow-wrap: anywhere;
+    overflow-y: scroll;
+    height: 60px;
 }
 
 .descripcion_album::-webkit-scrollbar-thumb {
@@ -778,7 +790,7 @@ h1 {
     width: 100%;
     display: flex;
     justify-content: center;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
 }
 
 .btn_contenido {
