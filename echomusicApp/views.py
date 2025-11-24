@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 import bcrypt
 import os
-from .models import Usuario, Album, Cancion, Album_Cancion
+from .models import Usuario, Album, Cancion, Album_Cancion, Playlist, Playlist_Cancion
 from django.contrib.auth import logout as log_out
 
 def hashear_contraseña(contraseña):
@@ -392,5 +392,218 @@ def actualizar(request):
         except Exception as e:
             print(f"ERROR: {e}")
             return redirect('index')
+    else:
+        return redirect('login')
+    
+
+def crear_playlist(request):
+    if 'usuario_id' in request.session:
+        if request.method == 'POST':
+            imagen_playlist = request.FILES.get("imagen_playlist")
+            nombre = request.POST.get("nombre")
+            descripcion = request.POST.get("descripcion")
+
+            try:
+                usuario = Usuario.objects.get(id=request.session['usuario_id'])
+                if nombre:
+                    if imagen_playlist and imagen_valida(imagen_playlist):
+                        playñist = Playlist.objects.create(
+                            nombre=nombre,
+                            descripcion=descripcion,
+                            imagen=imagen_playlist,
+                            usuario=usuario
+                        )
+                    else:
+                        playlist = Playlist.objects.create(
+                            nombre=nombre,
+                            descripcion=descripcion,
+                            usuario=usuario
+                        )
+                    playlist.save()
+                    return redirect('playlists')
+                else:
+                    return redirect('playlists')           
+            except Exception as e:
+                print(f"ERROR: {e}")
+                return redirect('playlists')
+        else:
+            return redirect('playlists')
+    else:
+        return redirect('login')
+
+def playlists(request):
+    if 'usuario_id' in request.session:
+        usuario = Usuario.objects.get(id=request.session['usuario_id'])
+        playlists = Playlist.objects.filter(usuario=usuario).order_by('-fecha_creacion')
+        canciones = Cancion.objects.filter(usuario=usuario).order_by('-id')
+
+        data = {
+            'usuario':usuario,
+            'playlists': playlists,
+            'canciones': canciones
+        }
+
+        return render(request, 'playlists.html', data)
+    else:
+        return redirect('login')
+    
+def ver_playlist(request, playlist_id):
+    if 'usuario_id' in request.session:
+        try:
+            usuario = Usuario.objects.get(id=request.session['usuario_id'])
+            playlist = Playlist.objects.get(id=playlist_id, usuario=usuario)
+            canciones_playlist = Playlist_Cancion.objects.filter(playlist=playlist).order_by('orden')
+            todas_canciones = Cancion.objects.filter(usuario=usuario).order_by('-id')
+
+            data = {
+                'usuario': usuario,
+                'playlist': playlist,
+                'canciones_playlist': canciones_playlist,
+                'todas_canciones': todas_canciones
+            }
+
+            return render(request, 'ver_playlist.html', data)
+        except Exception as e:
+            print(f"ERROR: {e}")
+            return redirect('playlists')
+    else:
+        return redirect('login')
+    
+def agregar_cancion_playlist(request):
+    if 'usuario_id' in request.session:
+        if request.method == "POST":
+            playlist_id = request.POST.get('playlist_id')
+            cancion_id = request.POST.get('cancion_id')
+
+            try:
+                usuario = Usuario.objects.get(id=request.session['usuario_id'])
+                playlist = Playlist.objects.get(id=playlist_id, usuario=usuario)
+                cancion = Cancion.objects.get(id=cancion_id)
+
+                existe = Playlist_Cancion.objects.filter(playlist=playlist, cancion=cancion).exists()
+
+                if not existe:
+                    ultima_cancion = Playlist_Cancion.objects.filter(playlist=playlist).order_by('-orden').first()
+                    nuevo_orden = ultima_cancion.orden + 1 if ultima_cancion else 0
+
+                    Playlist_Cancion.objects.create(
+                        playlist=playlist,
+                        cancion=cancion,
+                        orden=nuevo_orden
+                    )
+
+                return redirect('ver_playlist', playlist_id=playlist_id)
+
+            except Exception as e:
+                print(f"ERROR: {e}")
+                return redirect('playlists')
+        else:
+            return redirect('playlists')
+    else:
+        return redirect('login')
+    
+def quitar_cancion_playlist(request):
+    if 'usuario_id' in request.session:
+        if request.method == "POST":
+            playlist_id = request.POST.get('playlist_id')
+            cancion_id = request.POST.get('cancion_id')
+
+            try:
+                usuario = Usuario.objects.get(id=request.session['usuario_id'])
+                playlist = Playlist.objects.get(id=playlist_id, usuario=usuario)
+                cancion = Cancion.objects.get(id=cancion_id)
+
+                Playlist_Cancion.objects.filter(playlist=playlist, cancion=cancion).delete()
+
+                canciones_restantes = Playlist_Cancion.objects.filter(playlist=playlist).order_by('orden')
+                for index, pc in enumerate(canciones_restantes):
+                    pc.orden = index
+                    pc.save()
+
+                return redirect('ver_playlist', playlist_id=playlist_id)
+
+            except Exception as e:
+                print(f"ERROR: {e}")
+                return redirect('ver_playlist', playlist_id=playlist_id)
+        else:
+            return redirect('playlists')
+    else:
+        return redirect('login')
+    
+def reordenar_playlist(request):
+    if 'usuario_id' in request.session:
+        if request.method == "POST":
+            playlist_id = request.POST.get('playlist_id')
+            canciones_ordenadas = request.POST.getlist('cancion_orden[]')
+
+            try:
+                usuario = Usuario.objects.get(id=request.session['usuario_id'])
+                playlist = Playlist.objects.get(id=playlist_id, usuario=usuario)
+
+                for index, cancion_id in enumerate(canciones_ordenadas):
+                    if cancion_id:
+                        pc = Playlist_Cancion.objects.get(playlist=playlist, cancion_id=cancion_id)
+                        pc.orden = index
+                        pc.save()
+
+                return redirect('ver_playlist', playlist_id=playlist_id)
+
+            except Exception as e:
+                print(f"ERROR: {e}")
+                return redirect('ver_playlist', playlist_id=playlist_id)
+        else:
+            return redirect('playlists')
+    else:
+        return redirect('login')
+    
+def editar_playlist(request):
+    if 'usuario_id' in request.session:
+        if request.method == "POST":
+            playlist_id = request.POST.get('playlist_id')
+            nombre = request.POST.get('nombre')
+            descripcion = request.POST.get('descripcion')
+            imagen_playlist = request.FILES.get('imagen_playlist')
+
+            try:
+                usuario = Usuario.objects.get(id=request.session['usuario_id'])
+                playlist = Playlist.objects.get(id=playlist_id, usuario=usuario)
+
+                if nombre:
+                    playlist.nombre = nombre
+                
+                if descripcion:
+                    playlist.descripcion = descripcion
+                
+                if imagen_playlist and imagen_valida(imagen_playlist):
+                    playlist.imagen = imagen_playlist
+                
+                playlist.save()
+                return redirect('ver_playlist', playlist_id=playlist_id)
+
+            except Exception as e:
+                print(f"ERROR: {e}")
+                return redirect('playlists')
+        else:
+            return redirect('playlists')
+    else:
+        return redirect('login')
+    
+def eliminar_playlist(request):
+    if 'usuario_id' in request.session:
+        if request.method == "POST":
+            playlist_id = request.POST.get('playlist_id')
+
+            try:
+                usuario = Usuario.objects.get(id=request.session['usuario_id'])
+                playlist = Playlist.objects.get(id=playlist_id, usuario=usuario)
+                playlist.delete()
+
+                return redirect('playlists')
+
+            except Exception as e:
+                print(f"ERROR: {e}")
+                return redirect('playlists')
+        else:
+            return redirect('playlists')
     else:
         return redirect('login')

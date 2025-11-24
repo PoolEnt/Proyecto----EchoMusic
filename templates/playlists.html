@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EchoMusic: Mis Playlists</title>
+    <link rel="stylesheet" href="/static/styles/playlists.css">
+</head>
+<body>
+    <div class="div_fondo_playlists">
+        <header>
+            <a class="img_logo" href="{% url 'index' %}"></a>
+            <h2 class="titulo_header">Mis Playlists</h2>
+            <a class="btn_perfil" href="{% url 'perfil' %}"></a>
+            <a class="btn_logout" href="{% url 'logout' %}"></a>
+        </header>
+
+        <div class="div_contenido">
+            <div class="div_header_playlists">
+                <h1>Tus listas de reproducción</h1>
+                <button class="btn_crear_playlist" type="button" id="btn_crear_playlist">+ Nueva Playlist</button>
+            </div>
+
+            <div class="grid_playlists">
+                {% if playlists %}
+                    {% for playlist in playlists %}
+                        <a href="{% url 'ver_playlist' playlist.id %}" class="card_playlist">
+                            <img class="imagen_playlist" src="{{ playlist.imagen.url }}" alt="imagen_playlist">
+                            <div class="info_playlist">
+                                <p class="nombre_playlist"><strong>{{ playlist.nombre }}</strong></p>
+                                <p class="descripcion_playlist">{{ playlist.descripcion }}</p>
+                                <p class="cantidad_canciones">{{ playlist.playlist_cancion_set.count }} canciones</p>
+                            </div>
+                        </a>
+                    {% endfor %}
+                {% else %}
+                    <div class="div_vacio">
+                        <h3 class="txt_mensaje">No tienes playlists aún</h3>
+                        <p class="txt_submensaje">Crea tu primera lista de reproducción</p>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    
+    <div class="div_fondo" id="div_fondo_crear">
+        <form class="div_form" action="{% url 'crear_playlist' %}" enctype="multipart/form-data" method="post">
+            {% csrf_token %}
+            <h1 class="titulo_form">Nueva Playlist</h1>
+
+            <div class="div_image_form">
+                <div class="btn_image_hover" id="btn_image_hover"></div>
+                <img class="btn_image" src="/media/default/img_album.svg" id="btn_image" alt="imagen_playlist">
+            </div>
+            
+            <input id="input_imagen" type="file" style="display: none;" name="imagen_playlist">
+            <input class="input_form" type="text" maxlength="30" placeholder="Nombre de la playlist" name="nombre" required>
+            <textarea class="txt_descripcion" name="descripcion" maxlength="100" placeholder="Descripción (opcional)"></textarea>
+
+            <div class="div_botones_form">
+                <button type="submit" class="btn_aceptar">Crear</button>
+                <button type="button" class="btn_cancelar" id="btn_cancelar">Cancelar</button>
+            </div>
+        </form>
+    </div>
+
+    <script src="/static/scripts/playlists.js"></script>
+</body>
+</html>

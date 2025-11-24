@@ -36,8 +36,24 @@ class Cancion(models.Model):
     imagen = models.ImageField(validators=[imagen_valida], null=False, blank=False, default='/default/img_album.svg')
     archivo = models.FileField(validators=[audio_valido], null=False, blank=False, unique=True)
     usuario = models.ForeignKey(Usuario, null=False, blank=False, on_delete=models.CASCADE)
-    favorito = models.BooleanField(null=False, blank=False, default=False)
+    #favorito = models.BooleanField(null=False, blank=False, default=False)
 
 class Album_Cancion(models.Model):
     album = models.ForeignKey(Album, null=False, blank=False, on_delete=models.CASCADE)
     cancion = models.ForeignKey(Cancion, null=False, blank=False, on_delete=models.CASCADE)
+
+class Playlist(models.Model):
+    nombre = models.CharField(max_length=30, null=False, blank=False)
+    descripcion = models.TextField(max_length=100, null=True, blank=True)
+    imagen = models.ImageField(validators=[imagen_valida], null=False, blank=False, default='/default/img_album.svg')
+    usuario = models.ForeignKey(Usuario, null=False, blank=False, on_delete=models.CASCADE)
+    fecha_creacion = models.DateField(auto_now_add=True)
+
+class Playlist_Cancion(models.Model):
+    playlist = models.ForeignKey(Playlist, null=False, blank=False, on_delete=models.CASCADE)
+    cancion = models.ForeignKey(Cancion, null=False, blank=False,on_delete=models.CASCADE)
+    orden = models.IntegerField(null=False, blank=False, default=0)
+
+    class Meta:
+        ordering = ['orden']
+        unique_together = ('playlist', 'cancion')

@@ -11,6 +11,7 @@
     <div class="div_fondo_home">
         <header>
             <a class="img_logo" href="{% url 'index' %}"></a>
+            <a class="btn_playlists" href="{% url 'playlists' %}">Playlists</a>
             <form class="form_buscar" action="{% url 'buscar' %}" method="get">
                 {% csrf_token %}
                 <div class="div_buscar">

@@ -34,7 +34,15 @@ urlpatterns = [
     path('logout/', views.logout, name='logout'),
     path('crear_album/', views.crear_album, name='crear_album'),
     path('buscar/', views.buscar, name='buscar'),
-    path('actualizar/', views.actualizar, name='actualizar')
+    path('actualizar/', views.actualizar, name='actualizar'),
+    path('crear_playlist/', views.crear_playlist, name='crear_playlist'),
+    path('playlists/', views.playlists, name='playlists'),
+    path('ver_playlist/<int:playlist_id>/', views.ver_playlist, name='ver_playlist'),
+    path('agregar_cancion_playlist/', views.agregar_cancion_playlist, name='agregar_cancion_playlist'),
+    path('quitar_cancion_playlist/', views.quitar_cancion_playlist, name='quitar_cancion_playlist'),
+    path('reordenar_playlist/', views.reordenar_playlist, name='reordenar_playlist'),
+    path('editar_playlist/', views.editar_playlist, name='editar_playlist'),
+    path('eliminar_playlist/', views.eliminar_playlist, name='eliminar_playlist'),
 ]
 
 if settings.DEBUG:
