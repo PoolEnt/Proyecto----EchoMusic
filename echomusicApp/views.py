@@ -405,3 +405,19 @@ def actualizar(request):
             return redirect('index')
     else:
         return redirect('login')
+    
+def eliminar_cancion(request):
+    if 'usuario_id' in request.session:
+        id_cancion = request.POST.get('id_cancion')
+
+        try:
+            id_cancion = int(id_cancion)
+            cancion = Cancion.objects.get(id=id_cancion)
+
+            cancion.delete()
+
+            return redirect('index')
+        except Exception as e:
+            print(f'ERROR: {e}')
+    else:
+        return redirect('login')

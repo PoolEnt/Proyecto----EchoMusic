@@ -58,6 +58,7 @@
                                     <input type="hidden" name="cancion_id" value="{{ cancion.id }}">
                                     <button class="btn_eliminar_favorito" type="submit">Eliminar de favoritos</button>
                                 </form>
+                                <audio class="audio_cancion" src="{{ cancion.archivo.url }}"></audio>
                             </div>
                         {% endfor %}
                     </div>

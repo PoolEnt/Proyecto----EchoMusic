@@ -35,6 +35,9 @@
                 {% if canciones %}
                     {% for cancion in canciones %}
                         <div class="div_cancion">
+                            <div class="div_btn_contenido">
+                                <button class="btn_cancion"></button>
+                            </div>
                             <img class="imagen_cancion" src="{{ cancion.imagen.url }}" alt="imagen_cancion">
                             <div class="div_nombre_autor">
                                 <p class="nombre_cancion"><strong>{{ cancion.nombre }}</strong></p>
@@ -48,6 +51,18 @@
                                 </form>
                             {% endif %}
                             <audio class="audio_cancion" src="{{ cancion.archivo.url }}"></audio>
+                        </div>
+
+                        <div class="div_fondo_cancion">
+                            <form class="div_eliminar_cancion" action="{% url 'eliminar_cancion' %}" method="post">
+                                {% csrf_token %}
+                                <h1 class="titulo_form">Eliminar canción</h1>
+                                <div class="div_botones_form">
+                                    <button type="submit" class="btn_eliminar">Eliminar</button>
+                                    <button type="button" class="btn_cancelar_eliminar">Cancelar</button>
+                                </div>
+                                <input type="hidden" name="id_cancion" value="{{ cancion.id }}">
+                            </form>
                         </div>
                     {% endfor %}
                 {% else %}

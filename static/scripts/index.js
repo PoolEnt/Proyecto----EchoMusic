@@ -425,3 +425,27 @@ img_logo.addEventListener("click", function(){
     div_index.style.visibility = "visible"
     div_perfil.style.display = "none"
 })
+
+const btn_cancion = document.querySelectorAll(".btn_cancion")
+
+btn_cancion.forEach(boton => {
+    boton.addEventListener("click", function(){
+        const div_btn_contenido = boton.parentElement
+        const div_cancion = div_btn_contenido.parentElement
+        const div_fondo_cancion = div_cancion.nextElementSibling
+
+        div_fondo_cancion.style.display = "grid"
+    })
+})
+
+const div_fondo_cancion = document.querySelectorAll(".div_fondo_cancion")
+
+div_fondo_cancion.forEach(div => {
+    const div_eliminar_cancion = div.firstElementChild
+    const div_botones_form = div_eliminar_cancion.querySelector(".div_botones_form")
+    const btn_cancelar_eliminar = div_botones_form.querySelector(".btn_cancelar_eliminar")
+
+    btn_cancelar_eliminar.addEventListener("click", function(){
+        div.style.display = "none"
+    })
+})
