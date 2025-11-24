@@ -413,6 +413,7 @@ const div_perfil = document.getElementById("div_perfil")
 div_perfil.style.display = "none"
 
 btn_perfil.addEventListener("click", function(){
+    div_index.style.position = "absolute"
     div_index.style.visibility = "hidden"
     div_perfil.style.display = "block"
 })
@@ -420,6 +421,7 @@ btn_perfil.addEventListener("click", function(){
 const img_logo = document.getElementById("img_logo")
 
 img_logo.addEventListener("click", function(){
+    div_index.style.position = "relative"
     div_index.style.visibility = "visible"
     div_perfil.style.display = "none"
 })

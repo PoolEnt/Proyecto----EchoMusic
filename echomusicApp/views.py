@@ -326,17 +326,32 @@ def buscar(request):
             usuario = Usuario.objects.get(id=request.session['usuario_id'])
 
             if buscar:
-                canciones = Cancion.objects.filter(nombre__icontains=buscar, usuario=usuario).order_by('-id')
+                canciones_resultantes = Cancion.objects.filter(nombre__icontains=buscar, usuario=usuario).order_by('-id')
+                canciones = Cancion.objects.filter(usuario=usuario).order_by('-id')
                 albumes = Album.objects.filter(nombre__icontains=buscar, usuario=usuario).order_by('-id')
-            
+                total_canciones = Cancion.objects.filter(usuario=usuario).count()
+                total_albumes = Album.objects.filter(usuario=usuario).count()
+                favoritos = []
+
+                for cancion in canciones:
+                    if cancion.favorito:
+                        favoritos.append(cancion)
+
+                for album in albumes:
+                    album.ids_canciones = set(album.album_cancion_set.values_list('cancion', flat=True))
+
                 data = {
                     'usuario':usuario,
                     'albumes': albumes,
-                    'canciones': canciones,
-                    'filtro':filtro
+                    'canciones': canciones_resultantes,
+                    'filtro':filtro,
+                    'total_canciones': total_canciones,
+                    'total_albumes': total_albumes,
+                    'canciones_favoritas': favoritos
                 }
 
                 return render(request, 'index.html', data)
+
             else:
                 return redirect('index')
         except Exception as e:
