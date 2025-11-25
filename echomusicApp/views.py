@@ -238,24 +238,37 @@ def subir_cancion(request):
                     else:
                         return redirect('index')
                 else:
-                    cancion = Cancion.objects.create(
-                        nombre=nombre,
-                        autor=autor,
-                        archivo=archivo,
-                        usuario=usuario
-                    )
+                    if nombre and autor and archivo:
+                        if audio_valido(archivo):
+                            cancion = Cancion.objects.create(
+                                nombre=nombre,
+                                autor=autor,
+                                archivo=archivo,
+                                usuario=usuario
+                            )
 
-                    return redirect('index')
+                            cancion.save()
+
+                            return redirect('index')
+                        else:
+                            return redirect('index')
+                    else:
+                        return redirect('index')
             else:
                 if nombre and autor and archivo:
-                    cancion = Cancion.objects.create(
-                        nombre=nombre,
-                        autor=autor,
-                        archivo=archivo,
-                        usuario=usuario
-                    )
+                    if audio_valido(archivo):
+                        cancion = Cancion.objects.create(
+                            nombre=nombre,
+                            autor=autor,
+                            archivo=archivo,
+                            usuario=usuario
+                        )
 
-                    return redirect('index')
+                        cancion.save()
+
+                        return redirect('index')
+                    else:
+                        return redirect('index')
                 else:
                     return redirect('index')
         except Exception as e:
