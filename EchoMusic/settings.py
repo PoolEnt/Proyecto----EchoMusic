@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'echomusicApp',
+    'django_cleanup.apps.CleanupConfig',
 ]
 
 MIDDLEWARE = [
