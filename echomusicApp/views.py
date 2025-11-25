@@ -365,41 +365,46 @@ def actualizar(request):
         album_id = request.POST.get('album_id')
         album_nombre = request.POST.get('album_nombre')
         canciones_quitar = request.POST.getlist('cancion_quitar[]')
+        eliminar_album = request.POST.get('eliminar_album')
 
         try:
             album_id = int(album_id)
             usuario = Usuario.objects.get(id=request.session['usuario_id'])
             album = Album.objects.get(id=album_id, usuario_id=usuario.id)
 
-            for id_quitar in canciones_quitar:
-                if id_quitar != '':
-                    id_cancion_quitar = int(id_quitar)
-                    cancion_quit = Cancion.objects.get(id=id_cancion_quitar)
-                    relacion = Album_Cancion.objects.filter(album=album, cancion=cancion_quit)
-                    relacion.delete()
-
-            album.nombre = album_nombre
-            album.save()
-
-            if canciones:
-                for cancion_id in canciones:
-                    if cancion_id != '':
-                        id_cancion = int(cancion_id)
-                        cancion = Cancion.objects.get(id=id_cancion)
-                        relacion_si = Album_Cancion.objects.filter(album=album, cancion=cancion)
-                        if relacion_si:
-                            pass
-                        else:
-                            album_cancion = Album_Cancion.objects.create(
-                                album=album,
-                                cancion=cancion
-                            )
-                    else:
-                        pass
-                
+            if eliminar_album == 'eliminar':
+                album.delete()
                 return redirect('index')
             else:
-                return redirect('index')
+                for id_quitar in canciones_quitar:
+                    if id_quitar != '':
+                        id_cancion_quitar = int(id_quitar)
+                        cancion_quit = Cancion.objects.get(id=id_cancion_quitar)
+                        relacion = Album_Cancion.objects.filter(album=album, cancion=cancion_quit)
+                        relacion.delete()
+
+                album.nombre = album_nombre
+                album.save()
+
+                if canciones:
+                    for cancion_id in canciones:
+                        if cancion_id != '':
+                            id_cancion = int(cancion_id)
+                            cancion = Cancion.objects.get(id=id_cancion)
+                            relacion_si = Album_Cancion.objects.filter(album=album, cancion=cancion)
+                            if relacion_si:
+                                pass
+                            else:
+                                album_cancion = Album_Cancion.objects.create(
+                                    album=album,
+                                    cancion=cancion
+                                )
+                        else:
+                            pass
+                    
+                    return redirect('index')
+                else:
+                    return redirect('index')
         except Exception as e:
             print(f"ERROR: {e}")
             return redirect('index')

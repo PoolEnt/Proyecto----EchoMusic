@@ -444,6 +444,7 @@ h1 {
     bottom: 0;
     width: 40%;
     transform: translateX(-50%) translateY(200%);
+    z-index: 1;
 }
 
 .reproductor {
@@ -834,6 +835,21 @@ h1 {
 
 .btn_actualizar:hover {
     background-color: #ffd148;
+}
+
+.btn_eliminar_album {
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: rgb(230, 57, 86);
+    border-radius: 25px;
+    padding: 10px;
+    margin-top: 20px;
+    border: 0;
+    cursor: pointer;
+}
+
+.btn_eliminar_album:hover {
+    background-color: rgb(233, 91, 115);
 }
 
 .div_agregar_favorito {

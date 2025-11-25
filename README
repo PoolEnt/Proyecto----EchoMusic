@@ -3,4 +3,5 @@ Pip install {
     - mysqlclient
     - Pillow
     - bcrypt
+    - django-cleanup
 }

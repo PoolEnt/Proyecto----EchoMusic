@@ -7,6 +7,8 @@ btnEditar.addEventListener('click', () => {
 });
 
 btnCancelar.addEventListener('click', () => {
+    btnImage.src = imagen_original
+    inputFoto.value = ""
     divFondoEditar.style.display = 'none';
 });
 
@@ -14,6 +16,8 @@ const btnImageHover = document.getElementById('btn_image_hover');
 const btnImage = document.getElementById('btn_image');
 const inputFoto = document.getElementById('input_foto');
 const previewFoto = document.getElementById('preview_foto');
+
+const imagen_original = btnImage.src
 
 btnImageHover.addEventListener('click', () => {
     inputFoto.click();
@@ -24,12 +28,9 @@ btnImage.addEventListener('click', () => {
 });
 
 inputFoto.addEventListener('change', (e) => {
-    const file = e.target.files[0];
-    if (file) {
-        const reader = new FileReader();
-        reader.onload = (event) => {
-            btnImage.src = event.target.result;
-        };
-        reader.readAsDataURL(file);
+    if (inputFoto.files && inputFoto.files[0]) {
+        const imagen = inputFoto.files[0]
+        const image_url = URL.createObjectURL(imagen)
+        btnImage.src = image_url
     }
 });

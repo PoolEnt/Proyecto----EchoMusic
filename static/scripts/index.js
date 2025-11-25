@@ -284,6 +284,10 @@ btn_contenido.forEach(btn => {
         const div_album = div_btn_contenido.parentElement
         const div_fondo_contenido = div_album.nextElementSibling
         const div_contenido = div_fondo_contenido.querySelector(".div_contenido")
+        const div_lista_btn = div_contenido.nextElementSibling
+        const eliminar_album = div_lista_btn.querySelector(".eliminar_album")
+        const btn_actualizar = div_lista_btn.querySelector(".btn_actualizar")
+        const btn_eliminar_album = div_lista_btn.querySelector(".btn_eliminar_album")
         const btn_cerrar = div_contenido.querySelector(".btn_cerrar")
         const titulo_form_input = btn_cerrar.nextElementSibling
         const texto_titulo = titulo_form_input.value
@@ -309,6 +313,11 @@ btn_contenido.forEach(btn => {
             })
             div_fondo_contenido.style.display = "none"
             titulo_form_input.value = texto_titulo
+        })
+
+        btn_eliminar_album.addEventListener("click", function(){
+            eliminar_album.value = "eliminar"
+            btn_actualizar.click()
         })
     })
 })
