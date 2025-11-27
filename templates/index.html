@@ -13,6 +13,7 @@
         <div class="div_fondo_home">
             <header>
                 <a class="img_logo" href="{% url 'index' %}"></a>
+                <h1 style="margin-top: 0; margin-bottom: 0; margin-right: 20px;">EchoMusic</h1>
                 <form class="form_buscar" action="{% url 'buscar' %}" method="get">
                     {% csrf_token %}
                     <div class="div_buscar">
@@ -54,14 +55,24 @@
                         </div>
 
                         <div class="div_fondo_cancion">
-                            <form class="div_eliminar_cancion" action="{% url 'eliminar_cancion' %}" method="post">
+                            <form class="div_actualizar_cancion" enctype="multipart/form-data" action="{% url 'actualizar_cancion' %}" method="post">
                                 {% csrf_token %}
-                                <h1 class="titulo_form">Eliminar canción</h1>
-                                <div class="div_botones_form">
-                                    <button type="submit" class="btn_eliminar">Eliminar</button>
-                                    <button type="button" class="btn_cancelar_eliminar">Cancelar</button>
+                                <button type="button" class="btn_cerrar"></button>
+                                <input class="titulo_form_input" style="margin-top: 20px; margin-bottom: 20px;" maxlength="30" type="text" name="cancion_nombre" value="{{ cancion.nombre }}">
+
+                                <div class="div_image_form" style="margin: 0;">
+                                    <div class="btn_image_hover"></div>
+                                    <img class="btn_image" src="{{ cancion.imagen.url }}" alt="imagen_cancion">
                                 </div>
-                                <input type="hidden" name="id_cancion" value="{{ cancion.id }}">
+
+                                <input class="input_imagen_actualizar" type="file" style="display: none;" name="cancion_imagen">
+                                <input class="input_form" style="margin-top: 20px;" maxlength="30" type="text" name="cancion_autor" value="{{ cancion.autor }}">
+                                <div class="div_botones_actualizar_cancion">
+                                    <button type="submit" class="btn_actualizar_cancion">Actualizar</button>
+                                    <button type="button" class="btn_eliminar_cancion">Eliminar</button>
+                                </div>
+                                <input type="hidden" name="cancion_id" value="{{ cancion.id }}">
+                                <input class="eliminar_cancion" type="hidden" name="eliminar_cancion">
                             </form>
                         </div>
                     {% endfor %}
@@ -91,10 +102,17 @@
 
                         <div class="div_fondo_contenido">
                             <div class="div_contenidos">
-                                <form style="position: relative; display: flex;" action="{% url 'actualizar' %}" method="post">
+                                <form style="position: relative; display: flex;" enctype="multipart/form-data" action="{% url 'actualizar_album' %}" method="post">
                                     <div class="div_contenido">
                                         <button type="button" class="btn_cerrar"></button>
-                                        <input class="titulo_form_input" maxlength="30" type="text" name="album_nombre" value="{{ album.nombre }}">
+                                        <input class="titulo_form_input" style="margin-top: 20px; margin-bottom: 20px;" maxlength="30" type="text" name="album_nombre" value="{{ album.nombre }}">
+                                        
+                                        <div class="div_image_form" style="margin: 0;">
+                                            <div class="btn_image_hover"></div>
+                                            <img class="btn_image" src="{{ album.imagen.url }}" alt="imagen_álbum">
+                                        </div>
+
+                                        <input class="input_imagen_actualizar" type="file" style="display: none;" name="album_imagen">
                                         <div class="lista_canciones">
                                             {% if album.album_cancion_set.all %}
                                                 {% for A_C in album.album_cancion_set.all %}
@@ -115,6 +133,7 @@
                                                 </div>
                                             {% endif %}
                                         </div>
+                                        <textarea class="descripcion_form_input" style="height: 50px;" name="album_descripcion" maxlength="100">{{ album.descripcion }}</textarea>
                                     </div>
 
                                     <div class="div_lista_btn">
@@ -131,9 +150,14 @@
                                                 {% endif %}
                                             {% endfor %}
                                         </div>
+                                        
                                         <input type="hidden" value="{{ album.id }}" name="album_id">
-                                        <button class="btn_actualizar" type="submit">Actualizar</button>
-                                        <button class="btn_eliminar_album" type="button">Eliminar</button>
+
+                                        <div style="display: grid;">
+                                            <button class="btn_actualizar" type="submit">Actualizar</button>
+                                            <button class="btn_eliminar_album" type="button">Eliminar</button>
+                                        </div>
+                                        
                                         <input class="eliminar_album" type="hidden" name="eliminar_album">
                                     </div>
                                 </form>

@@ -372,11 +372,13 @@ def buscar(request):
     else:
         return redirect('login')
 
-def actualizar(request):
+def actualizar_album(request):
     if 'usuario_id' in request.session:
         canciones = request.POST.getlist('cancion_id[]')
         album_id = request.POST.get('album_id')
         album_nombre = request.POST.get('album_nombre')
+        album_imagen = request.FILES.get('album_imagen')
+        album_descripcion = request.POST.get('album_descripcion')
         canciones_quitar = request.POST.getlist('cancion_quitar[]')
         eliminar_album = request.POST.get('eliminar_album')
 
@@ -397,6 +399,9 @@ def actualizar(request):
                         relacion.delete()
 
                 album.nombre = album_nombre
+                if album_imagen:
+                    album.imagen = album_imagen
+                album.descripcion = album_descripcion
                 album.save()
 
                 if canciones:
@@ -423,19 +428,34 @@ def actualizar(request):
             return redirect('index')
     else:
         return redirect('login')
-    
-def eliminar_cancion(request):
+
+def actualizar_cancion(request):
     if 'usuario_id' in request.session:
-        id_cancion = request.POST.get('id_cancion')
+        cancion_id = request.POST.get('cancion_id')
+        cancion_nombre = request.POST.get('cancion_nombre')
+        cancion_imagen = request.FILES.get('cancion_imagen')
+        cancion_autor = request.POST.get('cancion_autor')
+        eliminar_cancion = request.POST.get('eliminar_cancion')
 
         try:
-            id_cancion = int(id_cancion)
-            cancion = Cancion.objects.get(id=id_cancion)
+            cancion_id = int(cancion_id)
+            usuario = Usuario.objects.get(id=request.session['usuario_id'])
+            cancion = Cancion.objects.get(id=cancion_id, usuario_id=usuario.id)
 
-            cancion.delete()
+            if eliminar_cancion == 'eliminar':
+                cancion.delete()
+                return redirect('index')
+            else:
+                cancion.nombre = cancion_nombre
 
-            return redirect('index')
+                if cancion_imagen:
+                    cancion.imagen = cancion_imagen
+                cancion.autor = cancion_autor
+                cancion.save()
+
+                return redirect('index')
         except Exception as e:
-            print(f'ERROR: {e}')
+            print(f"ERROR: {e}")
+            return redirect('index')
     else:
         return redirect('login')

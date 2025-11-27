@@ -1,7 +1,8 @@
-<div id="div_perfil">
+<div id="div_perfil" style="display: none;">
     <div class="div_fondo_perfil">
         <header>
             <button class="img_logo" id="img_logo"></button>
+            <h1 style="margin-top: 0; margin-bottom: 0; margin-right: 20px;">EchoMusic</h1>
             <form class="form_buscar" action="{% url 'buscar' %}" method="get">
                 {% csrf_token %}
                 <div class="div_buscar">
@@ -43,6 +44,8 @@
                 </div>
             </div>
 
+            <h1 style="margin-left: 10px;">Canciones favoritas</h1>
+            
             <div class="div_seccion" id="seccion_favoritos">
                 {% if canciones_favoritas %}
                     <div class="grid_canciones">

@@ -276,49 +276,72 @@ btn_filtro_albumes.addEventListener("click", function(){
 })
 
 const btn_contenido = document.querySelectorAll(".btn_contenido")
-const titulo_contenido = document.getElementById("titulo_contenido")
 
 btn_contenido.forEach(btn => {
+    const div_btn_contenido = btn.parentElement
+    const div_album = div_btn_contenido.parentElement
+    const div_fondo_contenido = div_album.nextElementSibling
+    const div_contenido = div_fondo_contenido.querySelector(".div_contenido")
+    const div_lista_btn = div_contenido.nextElementSibling
+    const eliminar_album = div_lista_btn.querySelector(".eliminar_album")
+    const btn_actualizar = div_lista_btn.querySelector(".btn_actualizar")
+    const btn_eliminar_album = div_lista_btn.querySelector(".btn_eliminar_album")
+    const btn_cerrar = div_contenido.querySelector(".btn_cerrar")
+    const titulo_form_input = btn_cerrar.nextElementSibling
+    const texto_titulo = titulo_form_input.value
+    const lista_canciones = titulo_form_input.nextElementSibling
+    const descripcion_form_input = div_contenido.querySelector(".descripcion_form_input")
+    const texto_descripcion = descripcion_form_input.value
+    const btn_image_hover = div_contenido.querySelector(".btn_image_hover")
+    const btn_image = div_contenido.querySelector(".btn_image")
+    const btn_image_anterior = btn_image.src
+    const input_imagen_actualizar = div_contenido.querySelector(".input_imagen_actualizar")
+    const div_cancion_album = document.querySelectorAll(".div_cancion_album")
+    const div_cancion_lista = document.querySelectorAll(".div_cancion_lista")
+
     btn.addEventListener("click", function(){
-        const div_btn_contenido = btn.parentElement
-        const div_album = div_btn_contenido.parentElement
-        const div_fondo_contenido = div_album.nextElementSibling
-        const div_contenido = div_fondo_contenido.querySelector(".div_contenido")
-        const div_lista_btn = div_contenido.nextElementSibling
-        const eliminar_album = div_lista_btn.querySelector(".eliminar_album")
-        const btn_actualizar = div_lista_btn.querySelector(".btn_actualizar")
-        const btn_eliminar_album = div_lista_btn.querySelector(".btn_eliminar_album")
-        const btn_cerrar = div_contenido.querySelector(".btn_cerrar")
-        const titulo_form_input = btn_cerrar.nextElementSibling
-        const texto_titulo = titulo_form_input.value
-
         div_fondo_contenido.style.display = "grid"
+    })
 
-        btn_cerrar.addEventListener("click", function(){
-            const div_cancion_album = document.querySelectorAll(".div_cancion_album")
-            const div_cancion_lista = document.querySelectorAll(".div_cancion_lista")
-            div_cancion_lista.forEach(div_cancion => {
-                const primer_hijo = div_cancion.firstElementChild
-                const btn_seleccionar_cancion = primer_hijo.nextElementSibling
-                const cancion_id = div_cancion.lastElementChild
-                cancion_id.value = ''
-                btn_seleccionar_cancion.className = "btn_seleccionar_cancion"
-            })
-
-            div_cancion_album.forEach(div => {
-                const cancion_id = div.nextElementSibling
-                const cancion_quitar = cancion_id.nextElementSibling
-                cancion_quitar.value = ''
-                div.style.display = 'flex'
-            })
-            div_fondo_contenido.style.display = "none"
-            titulo_form_input.value = texto_titulo
+    btn_cerrar.addEventListener("click", function(){
+        input_imagen_actualizar.value = ""
+        btn_image.src = btn_image_anterior
+            
+        div_cancion_lista.forEach(div_cancion => {
+            const primer_hijo = div_cancion.firstElementChild
+            const btn_seleccionar_cancion = primer_hijo.nextElementSibling
+            const cancion_id = div_cancion.lastElementChild
+            cancion_id.value = ''                
+            btn_seleccionar_cancion.className = "btn_seleccionar_cancion"
         })
 
-        btn_eliminar_album.addEventListener("click", function(){
-            eliminar_album.value = "eliminar"
-            btn_actualizar.click()
+        div_cancion_album.forEach(div => {
+            const cancion_id = div.nextElementSibling
+            const cancion_quitar = cancion_id.nextElementSibling
+            cancion_quitar.value = ''
+            div.style.display = 'flex'
         })
+        
+        div_fondo_contenido.style.display = "none"
+        titulo_form_input.value = texto_titulo
+        descripcion_form_input.value = texto_descripcion
+    })
+
+    btn_image_hover.addEventListener("click", function(){
+        input_imagen_actualizar.click()
+    })
+
+    input_imagen_actualizar.addEventListener("change", function(){
+        if (input_imagen_actualizar.files && input_imagen_actualizar.files[0]) {
+            const imagen = input_imagen_actualizar.files[0]
+            const image_url = URL.createObjectURL(imagen)
+            btn_image.src = image_url
+        }
+    })
+
+    btn_eliminar_album.addEventListener("click", function(){
+        eliminar_album.value = "eliminar"
+        btn_actualizar.click()
     })
 })
 
@@ -419,8 +442,6 @@ const btn_perfil = document.getElementById("btn_perfil")
 const div_index = document.getElementById("div_index")
 const div_perfil = document.getElementById("div_perfil")
 
-div_perfil.style.display = "none"
-
 btn_perfil.addEventListener("click", function(){
     div_index.style.position = "absolute"
     div_index.style.visibility = "hidden"
@@ -450,11 +471,41 @@ btn_cancion.forEach(boton => {
 const div_fondo_cancion = document.querySelectorAll(".div_fondo_cancion")
 
 div_fondo_cancion.forEach(div => {
-    const div_eliminar_cancion = div.firstElementChild
-    const div_botones_form = div_eliminar_cancion.querySelector(".div_botones_form")
-    const btn_cancelar_eliminar = div_botones_form.querySelector(".btn_cancelar_eliminar")
+    const btn_cerrar = div.querySelector(".btn_cerrar")
+    const btn_image_hover = div.querySelector(".btn_image_hover")
+    const btn_image = div.querySelector(".btn_image")
+    const btn_image_anterior = btn_image.src
+    const input_imagen_actualizar = div.querySelector(".input_imagen_actualizar")
+    const titulo_form_input = div.querySelector(".titulo_form_input")
+    const titulo_form_input_anterior = titulo_form_input.value
+    const input_form = div.querySelector(".input_form")
+    const input_form_anterior = input_form.value
+    const btn_actualizar_cancion = div.querySelector(".btn_actualizar_cancion")
+    const btn_eliminar_cancion = div.querySelector(".btn_eliminar_cancion")
 
-    btn_cancelar_eliminar.addEventListener("click", function(){
+    btn_cerrar.addEventListener("click", function(){
         div.style.display = "none"
+        titulo_form_input.value = titulo_form_input_anterior
+        btn_image.src = btn_image_anterior
+        input_imagen_actualizar.value = ""
+        input_form.value = input_form_anterior
+    })
+
+    btn_image_hover.addEventListener("click", function(){
+        input_imagen_actualizar.click()
+    })
+
+    input_imagen_actualizar.addEventListener("change", function(){
+        if (input_imagen_actualizar.files && input_imagen_actualizar.files[0]) {
+            const imagen = input_imagen_actualizar.files[0]
+            const image_url = URL.createObjectURL(imagen)
+            btn_image.src = image_url
+        }
+    })
+
+    btn_eliminar_cancion.addEventListener("click", function(){
+        const eliminar_cancion = div.querySelector(".eliminar_cancion")
+        eliminar_cancion.value = "eliminar"
+        btn_actualizar_cancion.click()
     })
 })

@@ -33,8 +33,8 @@ urlpatterns = [
     path('logout/', views.logout, name='logout'),
     path('crear_album/', views.crear_album, name='crear_album'),
     path('buscar/', views.buscar, name='buscar'),
-    path('actualizar/', views.actualizar, name='actualizar'),
-    path('eliminar_cancion/', views.eliminar_cancion, name='eliminar_cancion')
+    path('actualizar_album/', views.actualizar_album, name='actualizar_album'),
+    path('actualizar_cancion/', views.actualizar_cancion, name='actualizar_cancion'),
 ]
 
 if settings.DEBUG:
